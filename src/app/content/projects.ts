@@ -437,10 +437,10 @@ export const projects: Project[] = [
     year: '2022',
     category: 'Flyers',
     tagline: 'Flyers y contenido para eventos de la escena local.',
-    client: 'Rimastería, Xperimental Battles, Bazar de emprendimientos y Daydream',
+    client: 'Rimastería, Last Food of the Year, Xperimental Battles, Bazar de emprendimientos y Daydream',
     role: 'Diseño de flyers y contenido para redes',
     intro:
-      'Flyers y contenido para redes de eventos locales: la serie de la Jornada 1 de Rimastería, el Bazar de emprendimientos en Lechería, Xperimental Battles y el lineup de Daydream.',
+      'Flyers y contenido para redes de eventos locales: la serie de la Jornada 1 de Rimastería, el Bazar de emprendimientos en Lechería, Last Food of the Year, Xperimental Battles y el lineup de Daydream.',
     premise: {
       title: 'Información clara, con actitud',
       paragraphs: [
@@ -451,6 +451,7 @@ export const projects: Project[] = [
     process: [
       { title: 'Rimastería · Jornada 1', text: 'Serie de flyer cuadrado, historias verticales, contenido de «loading» y pieza de agradecimiento.' },
       { title: 'Bazar de emprendimientos', text: 'Flyer de stands para emprendimientos, 22/OCT en Plaza El Parque, Lechería.' },
+      { title: 'Last Food of the Year', text: 'Flyer del «último delivery del año»: viernes 27/12 en Lido Kite Club, con lineup, DJ sets y los logos de Lacosta y Lido Kite.' },
       { title: 'Xperimental Battles', text: 'Flyer de batalla con premios, jurados, host e inscripción.' },
       { title: 'Daydream', text: 'Flyer de lineup sobre la ilustración de portada.' },
     ],
@@ -470,6 +471,10 @@ export const projects: Project[] = [
       {
         title: 'BAZAR DE EMPRENDIMIENTOS',
         items: [['flyers/bazar-emprendimientos', 'Flyer del bazar de emprendimientos, Lechería']],
+      },
+      {
+        title: 'LAST FOOD OF THE YEAR',
+        items: [['flyers/flyer-last-food-lacosta', 'Flyer de Last Food of the Year, con Lacosta y Lido Kite']],
       },
       {
         title: 'XPERIMENTAL BATTLES',

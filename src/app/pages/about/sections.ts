@@ -76,7 +76,7 @@ export class Stats {
 
 @Component({
   selector: 'app-expertise-list',
-  imports: [NgOptimizedImage, InViewDirective],
+  imports: [InViewDirective],
   template: `<ul class="m-0 flex list-none flex-col gap-2 p-0">
     @for (e of items; track e.label; let i = $index) {
       <li class="reveal" appInView [style.--d]="i * 0.06 + 's'">

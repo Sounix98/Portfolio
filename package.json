@@ -7,7 +7,6 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:sounix-portfolio-angular": "node dist/sounix-portfolio-angular/server/server.mjs",
     "images": "node scripts/optimize-images.mjs"
   },
   "private": true,
@@ -41,5 +40,8 @@
     "sharp": "^0.35.5",
     "typescript": "~6.0.2",
     "vitest": "^5.0.0"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

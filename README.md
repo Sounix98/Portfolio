@@ -35,3 +35,11 @@ La fuente de verdad es `portfolio-kit/GUIA_PORTAFOLIO.md`; los originales y recu
 ## Estilo
 
 Tokens, tipografía y animaciones en `src/styles.css`. Fuente: Inter Tight (`@fontsource-variable`). Las animaciones respetan `prefers-reduced-motion`.
+
+## Publicar en Vercel (gratis, plan Hobby)
+
+El build es 100 % estático: las 14 rutas se prerenderizan en `dist/sounix-portfolio-angular/browser` (≈20 MB), así que no hace falta servidor. `vercel.json` ya trae el comando, la carpeta de salida y el caché de imágenes.
+
+1. En vercel.com → **Add New… → Project** → importar `Sounix98/Portfolio`.
+2. No cambies nada (Vercel lee `vercel.json`; Node 22) → **Deploy**.
+3. Cada `git push` a `main` redepliega solo.
