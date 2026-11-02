@@ -6,14 +6,14 @@ Standalone + signals, rutas con carga diferida, SSR con prerender (SSG), Tailwin
 npm install
 npm start          # http://localhost:4200
 npm run build      # build de producción (prerender de las 14 rutas)
-npm run images     # optimiza ../portfolio-kit/assets → public/images (WebP) y regenera content/media.ts
+npm run images     # optimiza portfolio-kit/assets → public/images (WebP) y regenera content/media.ts
 ```
 
 Rutas: `/`, `/sobre-mi`, `/trabajos`, `/trabajos/:slug` (+ 404).
 
 ## Contenido
 
-La fuente de verdad es `../portfolio-kit/GUIA_PORTAFOLIO.md`. Los datos viven en `src/app/content/` (no hay que tocar componentes):
+La fuente de verdad es `portfolio-kit/GUIA_PORTAFOLIO.md`; los originales y recursos están en `portfolio-kit/assets` (incluye `clientes/`, los logos de aliados en `flyers/logos/`, las capturas de la web de NTAC en `ntac/web/` y los originales con marca de agua en `ntac/_originales-con-marca/`). Los datos viven en `src/app/content/` (no hay que tocar componentes):
 
 | Archivo | Qué controla |
 |---|---|

@@ -5,7 +5,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
 
-const SRC = path.resolve('../portfolio-kit/assets');
+// Usa el kit incluido en el repo (portfolio-kit/); si no existe, el de la carpeta contigua.
+const SRC = fs.existsSync('portfolio-kit/assets') ? path.resolve('portfolio-kit/assets') : path.resolve('../portfolio-kit/assets');
 const OUT = path.resolve('public/images');
 const MANIFEST = path.resolve('src/app/content/media.ts');
 const MAX_WIDTH = 1600;
