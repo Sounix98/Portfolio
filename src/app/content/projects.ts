@@ -404,7 +404,7 @@ export const projects: Project[] = [
       paragraphs: ['Cada portada se trabajó según el carácter del artista y de la canción.'],
     },
     process: [],
-    cover: 'portadas-musicales/landeau-todo-va-a-estar-bien',
+    cover: 'portadas-musicales/daerel-big-city',
     hero: ['portadas-musicales/daerel-big-city', 'Portada de Daerel: Big City'],
     gallery: [
       ['portadas-musicales/landeau-todo-va-a-estar-bien', 'Portada de Landeau: Todo va a estar bien'],
