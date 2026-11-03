@@ -170,6 +170,16 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#4d0b22"
     ]
   },
+  "branding/kryss-cakes-laminas/kryss-cakes-lamina-03-tarjetas": {
+    "w": 1600,
+    "h": 1000,
+    "tone": [
+      "#ff4126",
+      "#e66817",
+      "#9e6f13",
+      "#4d360b"
+    ]
+  },
   "branding/kryss-cakes-laminas/kryss-cakes-portada": {
     "w": 1600,
     "h": 1000,
@@ -190,34 +200,14 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#4d0b22"
     ]
   },
-  "branding/kryss-cakes-mocks/kryss-tarjeta-datos": {
-    "w": 804,
-    "h": 462,
-    "tone": [
-      "#ff26e4",
-      "#e61795",
-      "#9e1343",
-      "#4d0b22"
-    ]
-  },
-  "branding/kryss-cakes-mocks/kryss-tarjeta-patron": {
-    "w": 812,
-    "h": 460,
-    "tone": [
-      "#ff4126",
-      "#e6174b",
-      "#9e136a",
-      "#4d0b34"
-    ]
-  },
   "branding/kryss-cakes-mocks/kryss-tarjetas-sobre-fondo": {
-    "w": 926,
-    "h": 988,
+    "w": 1600,
+    "h": 1707,
     "tone": [
       "#ff2641",
-      "#e64b17",
-      "#9e6a13",
-      "#4d340b"
+      "#e63417",
+      "#9e4c13",
+      "#4d260b"
     ]
   },
   "branding/ovejero-laminas/ovejero-lamina-01-logotipo": {
@@ -260,6 +250,16 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#0b114d"
     ]
   },
+  "branding/ovejero-laminas/ovejero-paleta": {
+    "w": 1600,
+    "h": 896,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
   "branding/ovejero-laminas/ovejero-portada": {
     "w": 1600,
     "h": 1000,
@@ -280,14 +280,34 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#1c1c1c"
     ]
   },
+  "branding/ovejero-mocks/ovejero-identidad-papeleria": {
+    "w": 1600,
+    "h": 1213,
+    "tone": [
+      "#26aeff",
+      "#1761e6",
+      "#13209e",
+      "#0b114d"
+    ]
+  },
   "branding/ovejero-mocks/ovejero-papeleria": {
-    "w": 875,
-    "h": 549,
+    "w": 1600,
+    "h": 1059,
     "tone": [
       "#e6e6e6",
       "#a3a3a3",
       "#555555",
       "#1c1c1c"
+    ]
+  },
+  "branding/ovejero-mocks/ovejero-papeleria-escritorio": {
+    "w": 1600,
+    "h": 896,
+    "tone": [
+      "#ff7826",
+      "#e69b17",
+      "#9e9113",
+      "#4d470b"
     ]
   },
   "branding/ovejero-mocks/ovejero-tarjetas-oscuras": {
@@ -740,6 +760,106 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#0b344d"
     ]
   },
+  "ledco/aplicaciones/ledco-app-01-tarjetas": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#ff2678",
+      "#e6172d",
+      "#9e2913",
+      "#4d160b"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-02-camiseta": {
+    "w": 1600,
+    "h": 1067,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-03-valla": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#ff7826",
+      "#e61717",
+      "#9e1347",
+      "#4d0b24"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-04-vaso-frente": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-05-vaso-logo": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-06-taza": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#ff2678",
+      "#e6172d",
+      "#9e2913",
+      "#4d160b"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-07-taza-invertida": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#ff2678",
+      "#e6172d",
+      "#9e2913",
+      "#4d160b"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-08-papel-rosa": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#ff2678",
+      "#e6172d",
+      "#9e2913",
+      "#4d160b"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-09-papel-blanco": {
+    "w": 1600,
+    "h": 1200,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/aplicaciones/ledco-app-10-pantalla": {
+    "w": 1600,
+    "h": 1645,
+    "tone": [
+      "#ff26ae",
+      "#e61761",
+      "#9e1320",
+      "#4d0b11"
+    ]
+  },
   "ledco/banners/ledco-banner-01": {
     "w": 1600,
     "h": 900,
@@ -778,6 +898,56 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#17b2e6",
       "#139e8d",
       "#0b4d44"
+    ]
+  },
+  "ledco/camioneta/ledco-van-01-lateral": {
+    "w": 1600,
+    "h": 1056,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/camioneta/ledco-van-02-lateral-opuesto": {
+    "w": 1600,
+    "h": 1056,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/camioneta/ledco-van-03-trasera": {
+    "w": 1600,
+    "h": 1062,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/camioneta/ledco-van-04-arte-lateral-a": {
+    "w": 1600,
+    "h": 559,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/camioneta/ledco-van-05-arte-lateral-b": {
+    "w": 1600,
+    "h": 559,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
     ]
   },
   "ledco/catalogo/catalogo-01": {
@@ -1170,9 +1340,119 @@ export const media: Record<string, { w: number; h: number; tone?: string[] }> = 
       "#0b444d"
     ]
   },
+  "ledco/contenido/ledco-contenido-01-portada-video": {
+    "w": 1125,
+    "h": 2000,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/contenido/ledco-contenido-02-plus4-iglesia": {
+    "w": 1080,
+    "h": 1080,
+    "tone": [
+      "#2678ff",
+      "#172de6",
+      "#29139e",
+      "#160b4d"
+    ]
+  },
+  "ledco/contenido/ledco-contenido-03-valla-banner": {
+    "w": 1558,
+    "h": 922,
+    "tone": [
+      "#ff26ae",
+      "#e61761",
+      "#9e1320",
+      "#4d0b11"
+    ]
+  },
   "ledco/homepower/homepower-flyer": {
     "w": 851,
     "h": 2000,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-01-intro": {
+    "w": 1600,
+    "h": 896,
+    "tone": [
+      "#ff26ae",
+      "#e61761",
+      "#9e1320",
+      "#4d0b11"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-02-logotipo": {
+    "w": 1600,
+    "h": 896,
+    "tone": [
+      "#ff26ae",
+      "#e61761",
+      "#9e1320",
+      "#4d0b11"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-03-paleta": {
+    "w": 1600,
+    "h": 571,
+    "tone": [
+      "#ff26ae",
+      "#e61761",
+      "#9e1320",
+      "#4d0b11"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-04-tipografia": {
+    "w": 1600,
+    "h": 896,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-05-patron-oscuro": {
+    "w": 1600,
+    "h": 571,
+    "tone": [
+      "#ff4126",
+      "#e66817",
+      "#9e6f13",
+      "#4d360b"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-06-patron-claro": {
+    "w": 1600,
+    "h": 571,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-07-ficha": {
+    "w": 1600,
+    "h": 571,
+    "tone": [
+      "#e6e6e6",
+      "#a3a3a3",
+      "#555555",
+      "#1c1c1c"
+    ]
+  },
+  "ledco/identidad/ledco-identidad-08-web": {
+    "w": 1600,
+    "h": 896,
     "tone": [
       "#e6e6e6",
       "#a3a3a3",
