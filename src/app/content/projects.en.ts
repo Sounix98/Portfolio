@@ -447,6 +447,7 @@ export const phrasesEn: Record<string, string> = {
   'Ovejero Uniformes: tarjetas personales en azul marino con el patrón de la oveja': 'Ovejero Uniformes: navy business cards with the sheep pattern',
   'Ovejero Uniformes: papelería con la identidad': 'Ovejero Uniformes: stationery with the identity',
   'Logotipo de Kryss Cakes': 'Kryss Cakes logo',
+  'Logotipo de Mercado Libre': 'Mercado Libre logo',
   'Logotipo de TAI Studio': 'TAI Studio logo',
   'Logotipo de Four-Two Streetwear': 'Four-Two Streetwear logo',
   'Kryss Cakes: tarjetas personales sobre fondo rosa y durazno': 'Kryss Cakes: business cards on a pink and peach background',

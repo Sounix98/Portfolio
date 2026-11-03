@@ -44,6 +44,10 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1315,
     "h": 1297
   },
+  "branding/hero/mercado-libre-logo-blanco": {
+    "w": 1600,
+    "h": 394
+  },
   "branding/hero/ovejero-logo-blanco": {
     "w": 1441,
     "h": 1147
@@ -571,6 +575,10 @@ export const media: Record<string, { w: number; h: number }> = {
   "mercadolibre-tucarro/mercadolibre-tienda-oficial-lg": {
     "w": 751,
     "h": 750
+  },
+  "mercadolibre-tucarro/ml-portada": {
+    "w": 1600,
+    "h": 1000
   },
   "mercadolibre-tucarro/tucarro-promo": {
     "w": 753,

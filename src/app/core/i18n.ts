@@ -26,6 +26,7 @@ function localize(p: Project): Project {
     cover: pic(p.cover),
     heroSlides: p.heroSlides?.map(pic),
     heroLogos: p.heroLogos?.map(pic),
+    heroBackdrop: p.heroBackdrop ? pic(p.heroBackdrop) : undefined,
     thumb: pic(p.thumb),
     gallery: p.gallery.map(pic),
     galleryGroups: p.galleryGroups?.map((g) => ({ title: ph(g.title), images: g.images.map(pic) })),

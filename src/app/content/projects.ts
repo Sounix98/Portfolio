@@ -32,6 +32,8 @@ export type Project = {
   heroSlides?: Pic[];
   /** Si existe, el hero muestra estos logos en blanco, sin fondo, sobre el negro de la página (a modo de introducción). */
   heroLogos?: Pic[];
+  /** Imagen de fondo del hero con logos: se muestra desenfocada, bajo un panel de cristal. */
+  heroBackdrop?: Pic;
   /** Miniatura fija (hero, Trabajos y «Siguiente proyecto»): elegida por afinidad con el look de la web. */
   thumb: Pic;
   gallery: Pic[];
@@ -51,24 +53,27 @@ function pic(key: string, alt: string): Pic {
   return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt };
 }
 
-type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'heroSlides' | 'heroLogos'> & {
+type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'heroSlides' | 'heroLogos' | 'heroBackdrop'> & {
   cover: string;
   /** [clave, alt] de imágenes extra para el carrusel del hero (tras la portada). */
   slides?: [string, string][];
   /** [clave, alt] de logos blancos con transparencia para la introducción del hero. */
   logos?: [string, string][];
+  /** [clave, alt] de la imagen que se desenfoca detrás de los logos. */
+  backdrop?: [string, string];
   /** [clave, alt] de la miniatura; si falta, se usa la portada. */
   hero?: [string, string];
   gallery: [string, string][]; // [clave, alt]
   groups?: { title: string; items: [string, string][] }[];
 };
 
-const project = ({ cover, hero, slides, logos, gallery, groups, ...seed }: Seed): Project => {
+const project = ({ cover, hero, slides, logos, backdrop, gallery, groups, ...seed }: Seed): Project => {
   const galleryGroups = groups?.map((g) => ({ title: g.title, images: g.items.map(([k, alt]) => pic(k, alt)) }));
   return {
     ...seed,
     cover: pic(cover, seed.title),
     heroLogos: logos?.map(([k, alt]) => pic(k, alt)),
+    heroBackdrop: backdrop ? pic(backdrop[0], backdrop[1]) : undefined,
     heroSlides: slides ? [pic(cover, seed.title), ...slides.map(([k, alt]) => pic(k, alt))] : undefined,
     thumb: hero ? pic(hero[0], hero[1]) : pic(cover, seed.title),
     gallery: galleryGroups ? galleryGroups.flatMap((g) => g.images) : gallery.map(([k, alt]) => pic(k, alt)),
@@ -473,8 +478,9 @@ export const projects: Project[] = [
       { label: 'Relación', value: 'Agencia (Mercado Libre) · directo, 6 meses (TuCarro)' },
       { label: 'Año', value: '2022' },
     ],
-    cover: 'mercadolibre-tucarro/tucarro-promo',
-    hero: ['mercadolibre-tucarro/tucarro-tutorial-moto', 'TuCarro: tutorial de moto'],
+    cover: 'mercadolibre-tucarro/ml-portada',
+    logos: [['branding/hero/mercado-libre-logo-blanco', 'Logotipo de Mercado Libre']],
+    backdrop: ['mercadolibre-tucarro/mercadolibre-prevencion-estafas', 'Mercado Libre: prevención de estafas'],
     gallery: [
       ['mercadolibre-tucarro/mercadolibre-prevencion-estafas', 'Mercado Libre: prevención de estafas'],
       ['mercadolibre-tucarro/mercadolibre-tienda-oficial-lg', 'Mercado Libre: tienda oficial LG'],

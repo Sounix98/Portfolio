@@ -17,9 +17,12 @@ import { NotFound } from './not-found';
     @if (project(); as p) {
       <main>
         <section #hero aria-labelledby="case-title" class="relative h-svh min-h-[560px] overflow-hidden">
-          <div #parallax class="absolute -inset-y-[10%] inset-x-0">
+          <div #parallax [class]="p.heroBackdrop ? 'absolute -inset-y-[40%] inset-x-0' : 'absolute -inset-y-[10%] inset-x-0'">
             @if (p.heroLogos) {
-              <!-- introducción con logo: sin fotografía -->
+              @if (p.heroBackdrop; as bd) {
+                <!-- pieza de la campaña desenfocada: el cristal y el logo van encima -->
+                <img [ngSrc]="bd.src" fill priority sizes="100vw" class="scale-125 object-cover blur-[36px] brightness-[1.35] saturate-[1.6]" alt="" aria-hidden="true" />
+              }
             } @else if (p.heroSlides; as slides) {
               @for (s of slides; track s.src; let i = $index) {
                 <img
@@ -38,17 +41,22 @@ import { NotFound } from './not-found';
               <img [ngSrc]="p.cover.src" fill priority sizes="100vw" class="object-cover" [alt]="p.cover.alt" />
             }
           </div>
-          <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]"></div>
+          <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]" [class.opacity-60]="!!p.heroBackdrop"></div>
+          @if (p.heroBackdrop) {
+          <!-- velo carmesí: el amarillo se va oscureciendo hacia el carmesí -->
+          <div aria-hidden="true" class="absolute inset-0 mix-blend-multiply bg-[linear-gradient(to_bottom,rgba(225,40,75,0.06)_0%,rgba(200,30,65,0.22)_50%,rgba(125,8,38,0.7)_100%)]"></div>
+          <div aria-hidden="true" class="hero-noise absolute inset-0"></div>
+          }
           @if (p.heroLogos; as logos) {
             <div class="pointer-events-none absolute inset-x-0 top-[calc(5%+68px)] bottom-[61%] px-[var(--gutter)]">
-              <div class="relative mx-auto h-full w-[min(560px,78vw)]">
+              <div class="relative mx-auto h-full w-[min(360px,62vw)]">
                 @for (l of logos; track l.src; let i = $index) {
                   <img
                     [ngSrc]="l.src"
                     fill
                     [priority]="i === 0"
                     [loading]="i === 0 ? undefined : 'eager'"
-                    sizes="(max-width: 700px) 78vw, 560px"
+                    sizes="(max-width: 600px) 62vw, 360px"
                     class="hero-slide object-contain"
                     [class.is-active]="i === slide()"
                     [alt]="i === 0 ? l.alt : ''"
@@ -232,7 +240,7 @@ export class Case {
       const hero = this.hero()?.nativeElement;
       const layer = this.parallax()?.nativeElement;
       if (!hero || !layer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const stop = scroll((p: number) => (layer.style.transform = `translateY(${p * 20}%)`), {
+      const stop = scroll((p: number) => (layer.style.transform = `translateY(${p * (this.project()?.heroBackdrop ? 22 : 20)}%)`), {
         target: hero,
         offset: ['start start', 'end start'],
       });

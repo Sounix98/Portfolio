@@ -246,6 +246,14 @@ a:active {
     animation-play-state: paused;
   }
 
+  /* Grano fino sobre un fondo desenfocado: rompe el degradado liso del blur */
+  .hero-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2.6 0 0 0 -.8 2.6 0 0 0 -.8 2.6 0 0 0 -.8 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.22;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
   /* ---------- Carrusel del hero de un caso: fundido largo + zoom lento ---------- */
   .hero-slide {
     opacity: 0;
