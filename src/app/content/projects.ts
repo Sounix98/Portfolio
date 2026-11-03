@@ -24,6 +24,8 @@ export type Project = {
   process: ProcessStep[];
   links?: { label: string; url: string }[];
   cover: Pic;
+  /** Si existe, el fondo del hero rota entre estas imágenes (la primera es la portada). */
+  heroSlides?: Pic[];
   /** Miniatura fija (hero, Trabajos y «Siguiente proyecto»): elegida por afinidad con el look de la web. */
   thumb: Pic;
   gallery: Pic[];
@@ -43,19 +45,22 @@ function pic(key: string, alt: string): Pic {
   return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt };
 }
 
-type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups'> & {
+type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'heroSlides'> & {
   cover: string;
+  /** [clave, alt] de imágenes extra para el carrusel del hero (tras la portada). */
+  slides?: [string, string][];
   /** [clave, alt] de la miniatura; si falta, se usa la portada. */
   hero?: [string, string];
   gallery: [string, string][]; // [clave, alt]
   groups?: { title: string; items: [string, string][] }[];
 };
 
-const project = ({ cover, hero, gallery, groups, ...seed }: Seed): Project => {
+const project = ({ cover, hero, slides, gallery, groups, ...seed }: Seed): Project => {
   const galleryGroups = groups?.map((g) => ({ title: g.title, images: g.items.map(([k, alt]) => pic(k, alt)) }));
   return {
     ...seed,
     cover: pic(cover, seed.title),
+    heroSlides: slides ? [pic(cover, seed.title), ...slides.map(([k, alt]) => pic(k, alt))] : undefined,
     thumb: hero ? pic(hero[0], hero[1]) : pic(cover, seed.title),
     gallery: galleryGroups ? galleryGroups.flatMap((g) => g.images) : gallery.map(([k, alt]) => pic(k, alt)),
     galleryGroups,
@@ -238,6 +243,10 @@ export const projects: Project[] = [
       { title: 'Identidad en Instagram', text: 'Íconos de highlights, post de logo y stories.' },
     ],
     cover: 'ledco/banners/ledco-banner-01-sin-logo',
+    slides: [
+      ['ledco/catalogo/catalogo-12', 'Catálogo de LEDCO: pantalla LiteXT para interiores'],
+      ['ledco/redes/poolpro-qled-03-create-your-vision-16x9', 'Post de LEDCO: Create your Vision, PoolPRO QLED'],
+    ],
     gallery: [
       ['ledco/catalogo/catalogo-01', 'Portada del catálogo de productos de LEDCO'],
       ['ledco/catalogo/catalogo-03', 'Página del catálogo de LEDCO'],

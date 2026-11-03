@@ -8,8 +8,8 @@
   --surface-node: #1a1a1a;
   --text: #ffffff;
   --text-soft: #bdbdbd;
-  --text-muted: #8a8a8a;
-  --text-dim: #5e5e5e;
+  --text-muted: #9c9c9c;
+  --text-dim: #7d7d7d;
   --line: rgba(255, 255, 255, 0.14);
   --track: #5f5f5f;
   --accent: #e4ff4f;
@@ -62,9 +62,9 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: "Inter Tight Variable", "Helvetica Neue", Arial, sans-serif;
-  font-size: 13px;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -93,59 +93,59 @@ a:active {
 @layer components {
   /* ---------- Tipografía (tokens de la sección 2) ---------- */
   .t-label {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0;
     text-transform: uppercase;
   }
   .t-label-sm {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0;
     text-transform: uppercase;
   }
   .t-nav {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 1;
     letter-spacing: 0;
     text-transform: uppercase;
   }
   .t-body {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    line-height: 1.55;
+    letter-spacing: -0.005em;
   }
   .t-small {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 500;
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
   }
   .t-h3 {
-    font-size: clamp(19px, 1.7vw, 24px);
+    font-size: clamp(21px, 1.8vw, 26px);
     font-weight: 500;
     line-height: 1.2;
     letter-spacing: -0.02em;
   }
   .t-quote {
-    font-size: 19px;
+    font-size: 22px;
     font-weight: 500;
     line-height: 1.22;
     letter-spacing: -0.02em;
   }
   .t-h2 {
-    font-size: clamp(28px, 2.7vw, 36px);
+    font-size: clamp(30px, 2.8vw, 38px);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
     text-transform: uppercase;
   }
   .t-statement {
-    font-size: clamp(26px, 3vw, 40px);
+    font-size: clamp(28px, 3.1vw, 42px);
     font-weight: 600;
     line-height: 1.27;
     letter-spacing: -0.035em;
@@ -165,7 +165,7 @@ a:active {
     text-transform: uppercase;
   }
   .t-toggle {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 1;
     letter-spacing: -0.02em;
@@ -244,6 +244,24 @@ a:active {
   }
   .thumbs:not(.is-visible) .drift {
     animation-play-state: paused;
+  }
+
+  /* ---------- Carrusel del hero de un caso: fundido largo + zoom lento ---------- */
+  .hero-slide {
+    opacity: 0;
+    transform: scale(1.07);
+    /* al salir: se desvanece y solo después recupera la escala, sin salto visible */
+    transition:
+      opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0s linear 1.6s;
+    will-change: opacity, transform;
+  }
+  .hero-slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    transition:
+      opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 4.6s cubic-bezier(0.2, 0.6, 0.3, 1);
   }
 }
 

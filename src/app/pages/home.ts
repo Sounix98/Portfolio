@@ -20,7 +20,7 @@ import { FloatingThumbs } from './floating-thumbs';
           <h1 id="hero-title" class="m-0 text-[clamp(56px,20vw,120px)] md:text-[clamp(64px,12.5vw,170px)]">
             <app-wordmark [text]="site.brand" [delay]="0.9" />
           </h1>
-          <p class="pointer-events-auto absolute top-full mt-7 max-w-[380px] text-center text-[13px] font-medium leading-[1.3] md:text-[14px]">
+          <p class="pointer-events-auto absolute top-full mt-7 max-w-[440px] text-center text-[15px] font-medium leading-[1.4] md:text-[16px]">
             {{ site.heroSubtitle }}
           </p>
         </section>

@@ -83,7 +83,7 @@ export class Stats {
         <article class="flex min-h-[96px] items-stretch rounded-card justify-between gap-4 bg-gradient-to-b from-[#232323] to-[#1d1d1d] p-[14px] md:min-h-[126px]">
           <div class="flex flex-col justify-center">
             <p class="t-label-sm m-0 text-muted">{{ e.label }}</p>
-            <h3 class="t-h3 mt-2 text-[17px] md:text-[19px]">{{ e.title }}</h3>
+            <h3 class="t-h3 mt-2 text-[19px] md:text-[21px]">{{ e.title }}</h3>
             <p class="t-small mt-2 max-w-[470px] text-soft">{{ e.text }}</p>
           </div>
           <div class="flex size-[72px] shrink-0 flex-col items-center justify-center gap-2.5 self-center rounded-card bg-[#141414] p-2.5 md:size-[106px] md:p-4">
@@ -120,7 +120,7 @@ export class ExpertiseList {
     >
       @for (t of items; track $index) {
         <li class="flex min-h-[206px] w-[85%] shrink-0 snap-start flex-col rounded-card justify-between bg-gradient-to-b from-[#232323] to-[#1d1d1d] p-[21px] md:w-[354px]">
-          <span class="h-[14px] text-[12px] font-semibold leading-[14px] tracking-[0.05em] text-soft">{{ t.logo }}</span>
+          <span class="h-[16px] text-[13px] font-semibold leading-[16px] tracking-[0.05em] text-soft">{{ t.logo }}</span>
           <blockquote class="t-quote m-0 my-4">“{{ t.quote }}”</blockquote>
           <footer>
             <p class="t-small m-0 text-ink">{{ t.name }}</p>
@@ -190,14 +190,14 @@ export class LogoMarquee {
         <li class="dim-item relative pb-[130px] last:pb-0 max-lg:pl-[78px] lg:pr-[84px]" appInView margin="0px 0px -50% 0px">
           <span
             aria-hidden="true"
-            class="absolute top-0 flex size-[54px] items-center justify-center rounded-full bg-node text-[14px] font-semibold max-lg:left-0 lg:right-0"
+            class="absolute top-0 flex size-[54px] items-center justify-center rounded-full bg-node text-[15px] font-semibold max-lg:left-0 lg:right-0"
             >{{ item.mark }}</span
           >
           <div class="max-w-[400px]">
             <p class="t-label-sm m-0 text-muted">{{ item.period }}</p>
-            <h3 class="mt-2.5 text-[clamp(19px,1.7vw,23px)] font-medium leading-[1.2] tracking-[-0.02em]">{{ item.title }}</h3>
+            <h3 class="mt-2.5 text-[clamp(21px,1.8vw,25px)] font-medium leading-[1.2] tracking-[-0.02em]">{{ item.title }}</h3>
             @if (item.location) {
-              <p class="mt-2 text-[11px] text-muted">{{ item.location }}</p>
+              <p class="mt-2 text-[14px] text-muted">{{ item.location }}</p>
             }
             <p class="t-small mt-3.5 text-ink">{{ item.text }}</p>
           </div>
@@ -240,8 +240,8 @@ export class ExperienceTimeline {
           [attr.rel]="s.external ? 'noopener noreferrer' : null"
           class="group grid min-h-9 grid-cols-[1fr_auto] items-center gap-x-4 py-2.5 transition-colors hover:text-accent md:grid-cols-[222px_1fr_auto] md:py-0"
         >
-          <span class="col-span-2 mb-0.5 text-[11px] font-medium uppercase text-muted md:col-span-1 md:mb-0">({{ s.label }})</span>
-          <span class="text-[13px] font-medium">{{ s.display }}</span>
+          <span class="col-span-2 mb-0.5 text-[13px] font-medium uppercase text-muted md:col-span-1 md:mb-0">({{ s.label }})</span>
+          <span class="text-[16px] font-medium">{{ s.display }}</span>
           <app-icon name="arrow-up-right" class="transition-transform duration-200 group-hover:-translate-y-[3px] group-hover:translate-x-[3px]" />
         </a>
         <div class="divider" appInView [style.--d]="i * 0.08 + 's'"></div>

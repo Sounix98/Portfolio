@@ -17,7 +17,7 @@ const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2,
     <div class="w-[80vw] md:w-[40vw]">
       <div class="flex items-center justify-between">
         <span class="t-nav">{{ brand }}</span>
-        <span class="text-[11px] tabular-nums text-muted">{{ pct() }}%</span>
+        <span class="text-[13px] tabular-nums text-muted">{{ pct() }}%</span>
       </div>
       <div class="mt-3 h-[2px] bg-[var(--track)]">
         <div class="h-full origin-left bg-accent" [style.transform]="'scaleX(' + pct() / 100 + ')'" [style.opacity]="pct() === 100 ? 0.8 : 1"></div>

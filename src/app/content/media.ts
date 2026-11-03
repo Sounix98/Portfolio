@@ -396,6 +396,10 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1080,
     "h": 1080
   },
+  "ledco/redes/poolpro-qled-03-create-your-vision-16x9": {
+    "w": 1600,
+    "h": 900
+  },
   "ledco/redes/poolpro-qled-04-patio": {
     "w": 1080,
     "h": 1080

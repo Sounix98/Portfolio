@@ -32,7 +32,7 @@ import {
         <div class="w-full pt-28 lg:w-[48.5%] lg:min-w-0">
           <section aria-labelledby="about-title">
             <app-statement-reveal headingId="about-title" [text]="site.statement" />
-            <p class="mt-[clamp(56px,8vw,120px)] max-w-[335px] text-[13px] leading-[1.35] text-soft">
+            <p class="mt-[clamp(56px,8vw,120px)] max-w-[420px] text-[16px] leading-[1.55] text-soft">
               {{ site.statementParagraph }}
             </p>
           </section>

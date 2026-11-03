@@ -1,5 +1,5 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, input, viewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, input, signal, viewChild } from '@angular/core';
 import { scroll } from 'motion';
 import { getNextProject, getProject } from '../content/projects';
 import { routes, ui } from '../content/site';
@@ -18,7 +18,23 @@ import { NotFound } from './not-found';
       <main>
         <section #hero aria-labelledby="case-title" class="relative h-svh min-h-[560px] overflow-hidden">
           <div #parallax class="absolute -inset-y-[10%] inset-x-0">
-            <img [ngSrc]="p.cover.src" fill priority sizes="100vw" class="object-cover" [alt]="p.cover.alt" />
+            @if (p.heroSlides; as slides) {
+              @for (s of slides; track s.src; let i = $index) {
+                <img
+                  [ngSrc]="s.src"
+                  fill
+                  [priority]="i === 0"
+                  [loading]="i === 0 ? undefined : 'eager'"
+                  sizes="100vw"
+                  class="hero-slide object-cover"
+                  [class.is-active]="i === slide()"
+                  [alt]="i === 0 ? s.alt : ''"
+                  [attr.aria-hidden]="i === slide() ? null : 'true'"
+                />
+              }
+            } @else {
+              <img [ngSrc]="p.cover.src" fill priority sizes="100vw" class="object-cover" [alt]="p.cover.alt" />
+            }
           </div>
           <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]"></div>
 
@@ -27,7 +43,7 @@ import { NotFound } from './not-found';
             @if (p.label) {
               <span class="t-label mt-2 text-accent">{{ p.label }}</span>
             }
-            <div class="t-label relative mt-[34px] flex min-h-9 w-[min(410px,86vw)] items-center justify-center px-5 py-2 text-center">
+            <div class="t-label relative mt-[34px] flex min-h-9 w-[min(480px,90vw)] items-center justify-center px-5 py-2 text-center">
               <app-corner-brackets [size]="8" />
               {{ p.tagline }}
             </div>
@@ -48,7 +64,7 @@ import { NotFound } from './not-found';
             <section aria-labelledby="details-title" class="grid gap-4 md:grid-cols-[160px_1fr] lg:grid-cols-[42%_1fr]">
               <h2 id="details-title" class="t-label m-0 text-muted">{{ ui.details }}</h2>
               <div class="max-w-[596px]">
-                <p class="t-quote m-0 max-w-[480px]">{{ p.intro }}</p>
+                <p class="t-quote m-0 max-w-[560px]">{{ p.intro }}</p>
                 <dl class="m-0 mt-10">
                   <div class="divider" appInView></div>
                   @for (m of meta(); track m[0]) {
@@ -81,8 +97,8 @@ import { NotFound } from './not-found';
             <section aria-labelledby="premise-title" class="mt-[clamp(60px,8vw,110px)] grid gap-4 md:grid-cols-[160px_1fr] lg:grid-cols-[42%_1fr]">
               <h2 id="premise-title" class="t-label m-0 text-muted">{{ ui.premise }}</h2>
               <div class="max-w-[596px]">
-                <h3 class="t-h3 m-0 text-[clamp(20px,2vw,24px)]">{{ p.premise.title }}</h3>
-                <div class="mt-5 flex flex-col gap-[18px] text-[13px] leading-[1.35]">
+                <h3 class="t-h3 m-0 text-[clamp(22px,2.1vw,26px)]">{{ p.premise.title }}</h3>
+                <div class="mt-5 flex flex-col gap-5 text-[16px] leading-[1.55]">
                   @for (par of p.premise.paragraphs; track $index) {
                     <p class="m-0">{{ par }}</p>
                   }
@@ -99,7 +115,7 @@ import { NotFound } from './not-found';
                     <li>
                       <p class="t-label-sm m-0 text-muted">0{{ i + 1 }}</p>
                       <h3 class="t-quote m-0 mt-2">{{ step.title }}</h3>
-                      <p class="t-small mt-2 max-w-[420px]">{{ step.text }}</p>
+                      <p class="t-small mt-2 max-w-[500px]">{{ step.text }}</p>
                     </li>
                   }
                 </ol>
@@ -175,10 +191,19 @@ export class Case {
 
   private readonly hero = viewChild<ElementRef<HTMLElement>>('hero');
   private readonly parallax = viewChild<ElementRef<HTMLElement>>('parallax');
+  /** Índice de la imagen visible en el carrusel del hero. */
+  protected readonly slide = signal(0);
 
   constructor() {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
+      // Carrusel del fondo: una imagen nueva cada 3 s (quieto si se prefiere menos movimiento).
+      const count = this.project()?.heroSlides?.length ?? 0;
+      if (count > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const timer = setInterval(() => this.slide.update((i) => (i + 1) % count), 3000);
+        destroyRef.onDestroy(() => clearInterval(timer));
+      }
+
       const hero = this.hero()?.nativeElement;
       const layer = this.parallax()?.nativeElement;
       if (!hero || !layer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;

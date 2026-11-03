@@ -18,11 +18,11 @@ type View = 'grid' | 'full';
       <div class="px-[var(--gutter)] pt-[clamp(110px,15vw,200px)]">
         <h1 class="t-works-h1 m-0 flex items-start gap-1">
           {{ ui.nav.works }}
-          <sup class="mt-1 text-[20px] font-medium tracking-normal" [attr.aria-label]="projects.length + ' proyectos'">({{ projects.length }})</sup>
+          <sup class="mt-1 text-[22px] font-medium tracking-normal" [attr.aria-label]="projects.length + ' proyectos'">({{ projects.length }})</sup>
         </h1>
 
         <div class="mt-10 grid items-end gap-6 md:grid-cols-3 md:gap-2">
-          <p class="max-w-[640px] text-[13px] text-soft md:col-span-2">{{ site.worksDescription }}</p>
+          <p class="max-w-[720px] text-[16px] leading-[1.55] text-soft md:col-span-2">{{ site.worksDescription }}</p>
           <div role="group" [attr.aria-label]="ui.view" class="flex items-center gap-16 lg:gap-[220px]">
             <button type="button" [attr.aria-pressed]="view() === 'grid'" (click)="view.set('grid')" class="t-toggle flex items-center gap-2 transition-colors" [class]="view() === 'grid' ? 'text-ink' : 'text-dim hover:text-soft'">
               {{ ui.grid }} <app-icon name="grid" [size]="14" />
@@ -47,7 +47,7 @@ type View = 'grid' | 'full';
                   <img [ngSrc]="p.thumb.src" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" class="object-cover" [alt]="p.title + ' — ' + p.category" />
                   <span class="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/15"></span>
                 </div>
-                <h2 class="mt-2.5 text-[12px] font-semibold leading-none">{{ p.title }}</h2>
+                <h2 class="mt-2.5 text-[15px] font-semibold leading-none">{{ p.title }}</h2>
               </a>
             </li>
           }
@@ -68,13 +68,13 @@ type View = 'grid' | 'full';
                   <span class="t-toggle hidden text-ink md:absolute md:left-[18px] md:top-1/2 md:block md:-translate-y-1/2">{{ p.year }}</span>
                   <span class="t-toggle hidden text-ink md:absolute md:right-[18px] md:top-1/2 md:block md:-translate-y-1/2">{{ p.category }}</span>
 
-                  <span class="text-[18px] font-medium md:hidden">{{ p.year }}</span>
+                  <span class="text-[20px] font-medium md:hidden">{{ p.year }}</span>
                   <div class="relative aspect-video w-[90%] md:w-[min(590px,70%)]">
                     <img [ngSrc]="p.cover.src" fill sizes="(max-width: 768px) 90vw, 41vw" class="rounded-card object-cover" [alt]="p.title + ' — ' + p.category" />
                     <app-corner-brackets [size]="10" [inset]="14" />
                     <span class="t-label absolute left-0 top-full mt-5">{{ p.title }}</span>
                   </div>
-                  <span class="text-[18px] font-medium md:hidden">{{ p.category }}</span>
+                  <span class="text-[20px] font-medium md:hidden">{{ p.category }}</span>
                 </div>
               </a>
             </li>
