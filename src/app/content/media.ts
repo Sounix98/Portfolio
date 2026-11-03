@@ -1,8 +1,8 @@
 // Generado por scripts/optimize-images.mjs — no editar a mano.
 export const media: Record<string, { w: number; h: number }> = {
   "about/sounix-retrato": {
-    "w": 704,
-    "h": 1195
+    "w": 1177,
+    "h": 2000
   },
   "branding/four-two-streetwear": {
     "w": 1600,
