@@ -480,7 +480,7 @@ export const projects: Project[] = [
     ],
     cover: 'mercadolibre-tucarro/ml-portada',
     logos: [['branding/hero/mercado-libre-logo-blanco', 'Logotipo de Mercado Libre']],
-    backdrop: ['mercadolibre-tucarro/mercadolibre-prevencion-estafas', 'Mercado Libre: prevención de estafas'],
+    backdrop: ['mercadolibre-tucarro/tucarro-tutorial-moto', 'TuCarro: tutorial de moto'],
     gallery: [
       ['mercadolibre-tucarro/mercadolibre-prevencion-estafas', 'Mercado Libre: prevención de estafas'],
       ['mercadolibre-tucarro/mercadolibre-tienda-oficial-lg', 'Mercado Libre: tienda oficial LG'],

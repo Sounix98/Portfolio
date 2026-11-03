@@ -20,8 +20,12 @@ import { NotFound } from './not-found';
           <div #parallax [class]="p.heroBackdrop ? 'absolute -inset-y-[40%] inset-x-0' : 'absolute -inset-y-[10%] inset-x-0'">
             @if (p.heroLogos) {
               @if (p.heroBackdrop; as bd) {
-                <!-- pieza de la campaña desenfocada: el cristal y el logo van encima -->
-                <img [ngSrc]="bd.src" fill priority sizes="100vw" class="scale-125 object-cover blur-[36px] brightness-[1.35] saturate-[1.6]" alt="" aria-hidden="true" />
+                <!-- pieza de la campaña desenfocada: arriba a la izquierda conserva su azul y en diagonal pasa al filtro amarillo → carmesí -->
+                <img [ngSrc]="bd.src" fill priority sizes="100vw" class="scale-125 object-cover blur-[36px] brightness-110 saturate-125" alt="" aria-hidden="true" />
+                <div aria-hidden="true" class="isolate absolute inset-0 [mask-image:linear-gradient(135deg,transparent_8%,black_62%)] [-webkit-mask-image:linear-gradient(135deg,transparent_8%,black_62%)]">
+                  <img [ngSrc]="bd.src" fill loading="eager" sizes="100vw" class="scale-125 object-cover blur-[36px] grayscale brightness-[2] contrast-[0.85]" alt="" aria-hidden="true" />
+                  <div class="absolute inset-0 mix-blend-multiply bg-[linear-gradient(135deg,#ffd400_0%,#f2b705_30%,#d9541a_62%,#a8122f_85%,#7d0826_100%)]"></div>
+                </div>
               }
             } @else if (p.heroSlides; as slides) {
               @for (s of slides; track s.src; let i = $index) {
@@ -41,10 +45,8 @@ import { NotFound } from './not-found';
               <img [ngSrc]="p.cover.src" fill priority sizes="100vw" class="object-cover" [alt]="p.cover.alt" />
             }
           </div>
-          <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]" [class.opacity-60]="!!p.heroBackdrop"></div>
+          <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]" [class.opacity-25]="!!p.heroBackdrop"></div>
           @if (p.heroBackdrop) {
-          <!-- velo carmesí: el amarillo se va oscureciendo hacia el carmesí -->
-          <div aria-hidden="true" class="absolute inset-0 mix-blend-multiply bg-[linear-gradient(to_bottom,rgba(225,40,75,0.06)_0%,rgba(200,30,65,0.22)_50%,rgba(125,8,38,0.7)_100%)]"></div>
           <div aria-hidden="true" class="hero-noise absolute inset-0"></div>
           }
           @if (p.heroLogos; as logos) {
