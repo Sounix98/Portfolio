@@ -25,6 +25,8 @@ export type Project = {
   links?: { label: string; url: string }[];
   cover: Pic;
   thumb: Pic;
+  /** Imágenes que rota el hero como miniatura (portada + galería, sin logos ni capturas). */
+  thumbs: Pic[];
   gallery: Pic[];
   /** Si existe, la galería se muestra agrupada con un título por grupo. */
   galleryGroups?: { title: string; images: Pic[] }[];
@@ -42,7 +44,7 @@ function pic(key: string, alt: string): Pic {
   return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt };
 }
 
-type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups'> & {
+type Seed = Omit<Project, 'cover' | 'thumb' | 'thumbs' | 'gallery' | 'galleryGroups'> & {
   cover: string;
   gallery: [string, string][]; // [clave, alt]
   groups?: { title: string; items: [string, string][] }[];
@@ -50,10 +52,17 @@ type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups'> & {
 
 const project = ({ cover, gallery, groups, ...seed }: Seed): Project => {
   const galleryGroups = groups?.map((g) => ({ title: g.title, images: g.items.map(([k, alt]) => pic(k, alt)) }));
+  // Al añadir imágenes a la galería de un proyecto, el hero las incluye solo en la rotación.
+  const entries: [string, string][] = groups ? groups.flatMap((g) => g.items) : gallery;
+  const thumbs = ([[cover, seed.title], ...entries] as [string, string][])
+    .filter(([k]) => !/logo|\/web\/|pendiente/.test(k))
+    .filter((e, i, all) => all.findIndex((x) => x[0] === e[0]) === i)
+    .map(([k, alt]) => pic(k, alt));
   return {
     ...seed,
     cover: pic(cover, seed.title),
     thumb: pic(cover, seed.title),
+    thumbs,
     gallery: galleryGroups ? galleryGroups.flatMap((g) => g.images) : gallery.map(([k, alt]) => pic(k, alt)),
     galleryGroups,
   };

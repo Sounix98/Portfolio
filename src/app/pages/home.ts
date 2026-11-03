@@ -35,6 +35,7 @@ import { FloatingThumbs } from './floating-thumbs';
   `,
 })
 export class Home {
-  protected readonly projects = projects;
+  // Solo proyectos con imagen real: la tarjeta gris de "capturas pendientes" no va en el hero.
+  protected readonly projects = projects.filter((p) => !p.cover.src.includes('_placeholder'));
   protected readonly site = site;
 }

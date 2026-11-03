@@ -1,6 +1,5 @@
-import { NgOptimizedImage } from '@angular/common';
-import { Component, DestroyRef, ElementRef, afterNextRender, inject, input, viewChild, viewChildren } from '@angular/core';
-import { Project } from '../content/projects';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject, input, signal, viewChild, viewChildren } from '@angular/core';
+import { Pic, Project } from '../content/projects';
 import { routes } from '../content/site';
 import { InViewDirective } from '../core/in-view.directive';
 import { TLink } from '../core/tlink.directive';
@@ -28,12 +27,22 @@ const SLOTS: Slot[] = [
   { w: 190, ratio: '4/3', dx: -12, dy: -10, dur: 35, depth: 0.6, vis: 'lg' },
 ];
 
-const VIS = { all: '', md: 'max-md:hidden', lg: 'max-lg:hidden' } as const;
-
 /** Vueltas completas del flujo durante todo el scroll (la referencia da ~1,5 en 7 s). */
 const TURNS = 1.5;
 
-const shows = (vis: Slot['vis'], w: number) => vis === 'all' || (vis === 'md' && w >= 768) || (vis === 'lg' && w >= 1024);
+// Móvil: todas las fotos, para llenar la pantalla. Tablet: se ocultan las más pequeñas ('lg').
+const shows = (vis: Slot['vis'], w: number) => w < 768 || vis !== 'lg' || w >= 1024;
+
+/**
+ * Móvil: carriles propios por foto (altura, tamaño, velocidad y giro distintos) para un caos
+ * controlado que llena la pantalla; las de los extremos son las más grandes.
+ */
+const MOBILE = {
+  y: [0.14, 0.87, 0.27, 0.77, 0.2, 0.83, 0.31, 0.71, 0.11],
+  size: [1.2, 1.1, 0.9, 1.0, 0.8, 0.85, 0.95, 0.75, 1.0],
+  spd: [1, 1.25, 0.8, 1.1, 0.9, 1.3, 0.85, 1.15, 1],
+  rot: [-5, 4, -3, 6, -6, 3, -4, 5, -2],
+};
 
 /**
  * Flujo de fotos medido sobre la referencia (Caspia), cuadro por cuadro:
@@ -45,14 +54,13 @@ const shows = (vis: Slot['vis'], w: number) => vis === 'all' || (vis === 'md' &&
  */
 @Component({
   selector: 'app-floating-thumbs',
-  imports: [NgOptimizedImage, TLink, InViewDirective],
+  imports: [TLink, InViewDirective],
   template: `
     <div #root appInView margin="0px" class="thumbs absolute inset-0">
       @for (item of items(); track item.project.slug; let i = $index) {
         <div
           #thumb
           class="absolute left-0 top-0 z-[42] will-change-transform hover:z-[48]"
-          [class]="vis[item.slot.vis]"
           [style.transform]="'translate3d(-50vw, 0, 0)'"
         >
           <div [style.transform]="'translate(calc(var(--px) * ' + 12 * item.slot.depth + 'px), calc(var(--py) * ' + 12 * item.slot.depth + 'px))'">
@@ -63,11 +71,10 @@ const shows = (vis: Slot['vis'], w: number) => vis === 'all' || (vis === 'md' &&
               >
                 <div class="relative w-full overflow-hidden rounded-card" [style.aspect-ratio]="item.slot.ratio">
                   <img
-                    [ngSrc]="item.project.thumb.src"
-                    fill
-                    sizes="(max-width: 768px) 40vw, 17vw"
-                    class="object-cover"
-                    [alt]="item.project.thumb.alt + ' — ' + item.project.category"
+                    [src]="pick(item.project, i).src"
+                    [alt]="pick(item.project, i).alt + ' — ' + item.project.category"
+                    decoding="async"
+                    class="absolute inset-0 size-full object-cover"
                   />
                 </div>
                 <span
@@ -88,8 +95,14 @@ export class FloatingThumbs {
   readonly projects = input.required<Project[]>();
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
   private readonly thumbs = viewChildren<ElementRef<HTMLElement>>('thumb');
-  protected readonly vis = VIS;
   protected route = routes.work;
+  /** Índice de la imagen mostrada por foto; sube cada vez que da la vuelta. */
+  protected readonly idx = signal<number[]>([]);
+
+  protected pick(p: Project, i: number): Pic {
+    const t = p.thumbs.length ? p.thumbs : [p.thumb];
+    return t[(this.idx()[i] ?? 0) % t.length];
+  }
 
   protected items() {
     return this.projects()
@@ -107,32 +120,72 @@ export class FloatingThumbs {
       let tx = 0, ty = 0, x = 0, y = 0; // parallax del ratón
       let target = 0, progress = 0; // scroll normalizado 0..1
       let raf = 0;
+      const prevPhase: number[] = [];
+
+      // Cuando una foto sale por un lado y vuelve a entrar por el otro, cambia a otra imagen de su proyecto.
+      const rotate = (i: number, phase: number) => {
+        const before = prevPhase[i];
+        prevPhase[i] = phase;
+        if (before === undefined || phase > before - 0.5) return;
+        const len = Math.max(1, list[i].project.thumbs.length);
+        if (len < 2) return;
+        this.idx.update((a) => {
+          const b = [...a];
+          b[i] = (b[i] ?? 0) + 1;
+          const next = list[i].project.thumbs[b[i] % len];
+          new Image().src = next.src; // precarga: se verá al volver a entrar
+          return b;
+        });
+      };
 
       const place = () => {
         const visible = list.map((it) => shows(it.slot.vis, W));
         const n = Math.max(1, visible.filter(Boolean).length);
-        const wb = Math.min(300, Math.max(96, W * 0.17)); // ancho base de una foto en el centro del carril
+        const mobile = W < 768;
+        const wb = mobile
+          ? Math.min(210, Math.max(130, W * 0.4)) // móvil: fotos grandes
+          : Math.min(300, Math.max(96, W * 0.17)); // ancho base de una foto en el centro del carril
         const hRef = wb * 0.75;
         const cy = H * 0.48; // centro vertical del título
         const edge = H * 0.012; // la foto roza el borde superior/inferior, como en la referencia
         const Bt = cy - hRef / 2 - edge; // amplitud del carril superior
         const Bb = H - edge - hRef / 2 - cy; // amplitud del carril inferior
-        const Ac = W * 0.44; // medio ancho de la curva coseno
-        const Aw = W / 2 + wb / 2 + 12; // fuera de pantalla: aquí se reinicia el recorrido
+        const Ac = W * (mobile ? 0.46 : 0.44); // medio ancho de la curva coseno
+        const Aw = W / 2 + (mobile ? wb * 1.2 : wb) / 2 + 12; // fuera de pantalla: aquí se reinicia el recorrido
         const L = 2 * Aw;
         let rank = 0;
         this.thumbs().forEach((ref, i) => {
+          const node = ref.nativeElement;
+          node.style.display = visible[i] ? '' : 'none';
           if (!visible[i]) return;
           const r = rank++;
+          const k = r % 9;
+          const [a, b] = list[i].slot.ratio.split('/').map(Number);
+
+          if (mobile) {
+            const w = wb * MOBILE.size[k];
+            const h = (w * b) / a;
+            const phase = (((r + 0.5) / n + progress * TURNS * MOBILE.spd[k]) % 1 + 1) % 1;
+            rotate(i, phase);
+            const dx = phase * L - Aw;
+            const c = Math.cos((Math.min(1, Math.abs(dx) / Ac) * Math.PI) / 2);
+            let yc = H * MOBILE.y[k] + (k % 2 === 0 ? 1 : -1) * H * 0.035 * c;
+            // no tapar el header ni salirse por abajo
+            yc = Math.min(H - 8 - h / 2, Math.max(56 + h / 2, yc));
+            const sc = 0.86 + 0.14 * c;
+            node.style.width = `${w.toFixed(1)}px`;
+            node.style.transform = `translate3d(${(W / 2 + dx - w / 2).toFixed(1)}px, ${(yc - h / 2).toFixed(1)}px, 0) rotate(${MOBILE.rot[k]}deg) scale(${sc.toFixed(3)})`;
+            return;
+          }
+
           const phase = (((r + 0.5) / n + progress * TURNS) % 1 + 1) % 1;
+          rotate(i, phase);
           const dx = phase * L - Aw;
           const c = Math.cos((Math.min(1, Math.abs(dx) / Ac) * Math.PI) / 2);
           const lane = r % 2 === 0 ? -1 : 1; // pares arriba, impares abajo
-          const [a, b] = list[i].slot.ratio.split('/').map(Number);
           const h = (wb * b) / a;
           const yc = cy + lane * (lane < 0 ? Bt : Bb) * c;
           const sc = 0.71 + 0.29 * c;
-          const node = ref.nativeElement;
           node.style.width = `${wb.toFixed(1)}px`;
           node.style.transform = `translate3d(${(W / 2 + dx - wb / 2).toFixed(1)}px, ${(yc - h / 2).toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
         });
@@ -161,6 +214,8 @@ export class FloatingThumbs {
         ty = (e.clientY / H) * 2 - 1;
       };
 
+      // Cada visita arranca con imágenes distintas de cada proyecto.
+      if (!reduced) this.idx.set(list.map((it) => Math.floor(Math.random() * Math.max(1, it.project.thumbs.length))));
       place();
       addEventListener('resize', onResize);
       if (!reduced) {
