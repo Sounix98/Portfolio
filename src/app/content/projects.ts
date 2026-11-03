@@ -24,9 +24,8 @@ export type Project = {
   process: ProcessStep[];
   links?: { label: string; url: string }[];
   cover: Pic;
+  /** Miniatura fija (hero, Trabajos y «Siguiente proyecto»): elegida por afinidad con el look de la web. */
   thumb: Pic;
-  /** Imágenes que rota el hero como miniatura (portada + galería, sin logos ni capturas). */
-  thumbs: Pic[];
   gallery: Pic[];
   /** Si existe, la galería se muestra agrupada con un título por grupo. */
   galleryGroups?: { title: string; images: Pic[] }[];
@@ -44,25 +43,20 @@ function pic(key: string, alt: string): Pic {
   return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt };
 }
 
-type Seed = Omit<Project, 'cover' | 'thumb' | 'thumbs' | 'gallery' | 'galleryGroups'> & {
+type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups'> & {
   cover: string;
+  /** [clave, alt] de la miniatura; si falta, se usa la portada. */
+  hero?: [string, string];
   gallery: [string, string][]; // [clave, alt]
   groups?: { title: string; items: [string, string][] }[];
 };
 
-const project = ({ cover, gallery, groups, ...seed }: Seed): Project => {
+const project = ({ cover, hero, gallery, groups, ...seed }: Seed): Project => {
   const galleryGroups = groups?.map((g) => ({ title: g.title, images: g.items.map(([k, alt]) => pic(k, alt)) }));
-  // Al añadir imágenes a la galería de un proyecto, el hero las incluye solo en la rotación.
-  const entries: [string, string][] = groups ? groups.flatMap((g) => g.items) : gallery;
-  const thumbs = ([[cover, seed.title], ...entries] as [string, string][])
-    .filter(([k]) => !/logo|\/web\/|pendiente/.test(k))
-    .filter((e, i, all) => all.findIndex((x) => x[0] === e[0]) === i)
-    .map(([k, alt]) => pic(k, alt));
   return {
     ...seed,
     cover: pic(cover, seed.title),
-    thumb: pic(cover, seed.title),
-    thumbs,
+    thumb: hero ? pic(hero[0], hero[1]) : pic(cover, seed.title),
     gallery: galleryGroups ? galleryGroups.flatMap((g) => g.images) : gallery.map(([k, alt]) => pic(k, alt)),
     galleryGroups,
   };
@@ -127,6 +121,7 @@ export const projects: Project[] = [
     ],
     links: [{ label: 'Sitio', url: 'https://sounix98.github.io/NTAC-PAGE-/' }],
     cover: 'ntac/ntac-branding-2022',
+    hero: ['ntac/photo_2025-10-18_22-35-46', 'Lookbook NTAC: calle de noche'],
     gallery: [],
     groups: [
       {
@@ -295,6 +290,7 @@ export const projects: Project[] = [
       { title: 'Póster 2024', text: 'Una pieza editorial que lleva el lettering a gran formato.' },
     ],
     cover: 'zipo/zipo-poster-2024',
+    hero: ['zipo/zipo-merch-design', 'Diseño de merch de ZIPO'],
     gallery: [
       ['zipo/zipo-poster-2024', 'Póster ZIPO 2024'],
       ['zipo/zipo-merch-linea-grafica', 'Línea gráfica de merch de ZIPO'],
@@ -325,6 +321,7 @@ export const projects: Project[] = [
       { title: 'Café Marketing', text: 'Campaña de planes y servicios de la propia agencia.' },
     ],
     cover: 'cafe-marketing/cafemkt-promo-01-llenalo-y-crece',
+    hero: ['cafe-marketing/dviajes-plan-bad-bunny-01-portada', 'D’Viajes: Plan Bad Bunny, portada'],
     gallery: [
       ['cafe-marketing/nanologic-dia-del-padre-01-portada', 'Nanologic: portada del carrusel Día del Padre'],
       ['cafe-marketing/nanologic-dia-del-padre-02-laptops', 'Nanologic: laptops, Día del Padre'],
@@ -385,6 +382,7 @@ export const projects: Project[] = [
       { title: 'TuCarro', text: 'Campañas, tutoriales e historias durante 6 meses.' },
     ],
     cover: 'mercadolibre-tucarro/tucarro-promo',
+    hero: ['mercadolibre-tucarro/tucarro-tutorial-moto', 'TuCarro: tutorial de moto'],
     gallery: [
       ['mercadolibre-tucarro/mercadolibre-prevencion-estafas', 'Mercado Libre: prevención de estafas'],
       ['mercadolibre-tucarro/mercadolibre-tienda-oficial-lg', 'Mercado Libre: tienda oficial LG'],
@@ -407,6 +405,7 @@ export const projects: Project[] = [
     },
     process: [],
     cover: 'portadas-musicales/landeau-todo-va-a-estar-bien',
+    hero: ['portadas-musicales/daerel-big-city', 'Portada de Daerel: Big City'],
     gallery: [
       ['portadas-musicales/landeau-todo-va-a-estar-bien', 'Portada de Landeau: Todo va a estar bien'],
       ['portadas-musicales/daerel-big-city', 'Portada de Daerel: Big City'],
@@ -431,6 +430,7 @@ export const projects: Project[] = [
     },
     process: [],
     cover: 'branding/kryss-cakes',
+    hero: ['flyers/photo_2021-08-09_19-49-03', 'Logotipo de Santuario Streetwear 2021'],
     gallery: [
       ['branding/kryss-cakes', 'Branding de Kryss Cakes'],
       ['branding/tai-studio', 'Branding de TAI Studio'],
@@ -465,6 +465,7 @@ export const projects: Project[] = [
       { title: 'Daydream', text: 'Flyer de lineup sobre la ilustración de portada.' },
     ],
     cover: 'flyers/bazar-emprendimientos',
+    hero: ['flyers/rimasteria_content', 'Rimastería: contenido «loading» de la Jornada 1'],
     gallery: [],
     groups: [
       {

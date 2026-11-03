@@ -1,5 +1,5 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, inject, input, signal, viewChild, viewChildren } from '@angular/core';
-import { Pic, Project } from '../content/projects';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject, input, viewChild, viewChildren } from '@angular/core';
+import { Project } from '../content/projects';
 import { routes } from '../content/site';
 import { InViewDirective } from '../core/in-view.directive';
 import { TLink } from '../core/tlink.directive';
@@ -71,8 +71,8 @@ const MOBILE = {
               >
                 <div class="relative w-full overflow-hidden rounded-card" [style.aspect-ratio]="item.slot.ratio">
                   <img
-                    [src]="pick(item.project, i).src"
-                    [alt]="pick(item.project, i).alt + ' — ' + item.project.category"
+                    [src]="item.project.thumb.src"
+                    [alt]="item.project.thumb.alt + ' — ' + item.project.category"
                     decoding="async"
                     class="absolute inset-0 size-full object-cover"
                   />
@@ -96,14 +96,6 @@ export class FloatingThumbs {
   private readonly root = viewChild.required<ElementRef<HTMLElement>>('root');
   private readonly thumbs = viewChildren<ElementRef<HTMLElement>>('thumb');
   protected route = routes.work;
-  /** Índice de la imagen mostrada por foto; sube cada vez que da la vuelta. */
-  protected readonly idx = signal<number[]>([]);
-
-  protected pick(p: Project, i: number): Pic {
-    const t = p.thumbs.length ? p.thumbs : [p.thumb];
-    return t[(this.idx()[i] ?? 0) % t.length];
-  }
-
   protected items() {
     return this.projects()
       .slice(0, SLOTS.length)
@@ -120,24 +112,6 @@ export class FloatingThumbs {
       let tx = 0, ty = 0, x = 0, y = 0; // parallax del ratón
       let target = 0, progress = 0; // scroll normalizado 0..1
       let raf = 0;
-      const prevPhase: number[] = [];
-
-      // Cuando una foto sale por un lado y vuelve a entrar por el otro, cambia a otra imagen de su proyecto.
-      const rotate = (i: number, phase: number) => {
-        const before = prevPhase[i];
-        prevPhase[i] = phase;
-        if (before === undefined || phase > before - 0.5) return;
-        const len = Math.max(1, list[i].project.thumbs.length);
-        if (len < 2) return;
-        this.idx.update((a) => {
-          const b = [...a];
-          b[i] = (b[i] ?? 0) + 1;
-          const next = list[i].project.thumbs[b[i] % len];
-          new Image().src = next.src; // precarga: se verá al volver a entrar
-          return b;
-        });
-      };
-
       const place = () => {
         const visible = list.map((it) => shows(it.slot.vis, W));
         const n = Math.max(1, visible.filter(Boolean).length);
@@ -166,7 +140,6 @@ export class FloatingThumbs {
             const w = wb * MOBILE.size[k];
             const h = (w * b) / a;
             const phase = (((r + 0.5) / n + progress * TURNS * MOBILE.spd[k]) % 1 + 1) % 1;
-            rotate(i, phase);
             const dx = phase * L - Aw;
             const c = Math.cos((Math.min(1, Math.abs(dx) / Ac) * Math.PI) / 2);
             let yc = H * MOBILE.y[k] + (k % 2 === 0 ? 1 : -1) * H * 0.035 * c;
@@ -179,7 +152,6 @@ export class FloatingThumbs {
           }
 
           const phase = (((r + 0.5) / n + progress * TURNS) % 1 + 1) % 1;
-          rotate(i, phase);
           const dx = phase * L - Aw;
           const c = Math.cos((Math.min(1, Math.abs(dx) / Ac) * Math.PI) / 2);
           const lane = r % 2 === 0 ? -1 : 1; // pares arriba, impares abajo
@@ -214,8 +186,6 @@ export class FloatingThumbs {
         ty = (e.clientY / H) * 2 - 1;
       };
 
-      // Cada visita arranca con imágenes distintas de cada proyecto.
-      if (!reduced) this.idx.set(list.map((it) => Math.floor(Math.random() * Math.max(1, it.project.thumbs.length))));
       place();
       addEventListener('resize', onResize);
       if (!reduced) {

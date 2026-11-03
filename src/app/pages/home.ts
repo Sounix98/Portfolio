@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { projects } from '../content/projects';
+import { getProject, type Project } from '../content/projects';
 import { site } from '../content/site';
 import { Wordmark } from '../ui/wordmark';
 import { FloatingThumbs } from './floating-thumbs';
@@ -35,7 +35,19 @@ import { FloatingThumbs } from './floating-thumbs';
   `,
 })
 export class Home {
-  // Solo proyectos con imagen real: la tarjeta gris de "capturas pendientes" no va en el hero.
-  protected readonly projects = projects.filter((p) => !p.cover.src.includes('_placeholder'));
+  // Orden pensado para alternar fotos oscuras y claras/saturadas a lo largo del flujo.
+  protected readonly projects: Project[] = [
+    'ntac',
+    'la-festa-fest',
+    'ledco',
+    'branding-de-marcas',
+    'cafe-marketing',
+    'zipo',
+    'portadas-musicales',
+    'mercado-libre-tucarro',
+    'flyers-de-eventos',
+  ]
+    .map((slug) => getProject(slug))
+    .filter((p): p is Project => !!p);
   protected readonly site = site;
 }
