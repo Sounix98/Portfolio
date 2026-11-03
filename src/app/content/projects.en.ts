@@ -9,6 +9,7 @@ export type ProjectText = {
   intro: string;
   premise: { title: string; paragraphs: string[] }; // same number of paragraphs as the Spanish
   process: { title: string; text: string }[]; // same number and order of steps as the Spanish ([] if Spanish is [])
+  facts?: { label: string; value: string }[]; // only for projects with a custom fact sheet in Spanish
 };
 
 export const projectsEn: Record<string, ProjectText> = {
@@ -106,21 +107,28 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'A hand-drawn rebrand: fire lettering for his merch.',
     label: 'Returning client',
     client: 'ZIPO',
-    role: 'Visual identity, hand illustration and merch design',
+    role: 'Rebrand, logo and merch application',
     intro:
-      'ZIPO is a great friend and colleague from the music world who runs businesses and also promotes events, so he hires me often. This project was his rebrand.',
+      'ZIPO moves between music, business and event production. He needed an image that would work the same on a T-shirt, a flyer or a stage, and that felt like his own, not off the shelf.',
     premise: {
-      title: 'A commercial image you can wear',
+      title: 'A gesture that doesn’t come from a template',
       paragraphs: [
-        'The rebrand aimed to give him a strong commercial image to build merch around.',
-        'I drew the logo by hand, then vectorized the flames in the name in Photoshop and Illustrator. The fire lettering was applied to T-shirts, embroidered caps and a 2024 poster.',
+        'I started on paper. I drew the logo by hand to keep the stroke and energy of the name, then took the flames into Photoshop and Illustrator to vectorize them without losing that character. The result is a commercial brand ready to produce merch, with a gesture that doesn’t come from a template.',
+        'It’s an ongoing working relationship: ZIPO comes back whenever his brand needs a new piece.',
       ],
     },
     process: [
-      { title: 'Hand drawing', text: 'I drew the logo by hand, with the name in fire lettering.' },
-      { title: 'Vectorizing', text: 'I vectorized the flames in the name in Photoshop and Illustrator, in black and white versions.' },
+      { title: 'Hand illustration', text: 'I drew the logo on paper to keep the stroke and energy of the name.' },
+      { title: 'Vectorizing', text: 'I took the flames into Photoshop and Illustrator to vectorize them without losing their character, in black and white versions.' },
       { title: 'Merch', text: 'T-shirts and embroidered caps following the brand’s graphic line.' },
       { title: '2024 poster', text: 'An editorial piece that brings the lettering to a large format.' },
+    ],
+    facts: [
+      { label: 'Client', value: 'ZIPO, musician and event promoter' },
+      { label: 'Scope', value: 'Rebrand, logo, merch application' },
+      { label: 'Process', value: 'Hand illustration → vectorization' },
+      { label: 'Tools', value: 'Photoshop, Illustrator' },
+      { label: 'Relationship', value: 'Returning client since 2024' },
     ],
   },
   'cafe-marketing': {

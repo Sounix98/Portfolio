@@ -22,6 +22,8 @@ export type Project = {
   /** Reto, solución y resultado. */
   premise: { title: string; paragraphs: string[] };
   process: ProcessStep[];
+  /** Si existe, sustituye a las filas por defecto (cliente, año, rol, tipo) de la ficha del caso. */
+  facts?: { label: string; value: string }[];
   links?: { label: string; url: string }[];
   cover: Pic;
   /** Si existe, el fondo del hero rota entre estas imágenes (la primera es la portada). */
@@ -305,21 +307,28 @@ export const projects: Project[] = [
     tagline: 'Rebranding a mano: lettering de fuego para su merch.',
     label: 'Cliente recurrente',
     client: 'ZIPO',
-    role: 'Identidad visual, dibujo a mano y diseño de merch',
+    role: 'Rebranding, logotipo y aplicación a merch',
     intro:
-      'ZIPO es un gran colega del mundo de la música que maneja negocios y también es promotor de eventos, por eso requiere mis servicios con frecuencia. Este proyecto fue su rebranding.',
+      'ZIPO se mueve entre la música, los negocios y la producción de eventos. Necesitaba una imagen que funcionara igual en una franela, un flyer o una tarima, y que se sintiera suya, no de catálogo.',
     premise: {
-      title: 'Una imagen comercial que se lleva puesta',
+      title: 'Un gesto que no sale de una plantilla',
       paragraphs: [
-        'El rebranding buscaba darle una imagen comercial con fuerza para hacer merch con ella.',
-        'Dibujé el logo a mano y luego vectoricé las flamas del nombre en Photoshop e Illustrator. El lettering de fuego se aplicó a camisetas, gorras bordadas y un póster 2024.',
+        'Empecé en papel. Dibujé el logo a mano para conservar el trazo y la energía del nombre, y después llevé las flamas a Photoshop e Illustrator para vectorizarlas sin perder ese carácter. El resultado es una marca comercial lista para producir merch, con un gesto que no sale de una plantilla.',
+        'Es una relación de trabajo que continúa: ZIPO vuelve cada vez que su marca necesita una pieza nueva.',
       ],
     },
     process: [
-      { title: 'Dibujo a mano', text: 'Dibujé el logo a mano, con el nombre en lettering de fuego.' },
-      { title: 'Vectorización', text: 'Vectoricé las flamas del nombre en Photoshop e Illustrator, en versión negra y blanca.' },
+      { title: 'Ilustración a mano', text: 'Dibujé el logo en papel para conservar el trazo y la energía del nombre.' },
+      { title: 'Vectorización', text: 'Llevé las flamas a Photoshop e Illustrator para vectorizarlas sin perder su carácter, en versión negra y blanca.' },
       { title: 'Merch', text: 'Camisetas y gorras bordadas con la línea gráfica de la marca.' },
       { title: 'Póster 2024', text: 'Una pieza editorial que lleva el lettering a gran formato.' },
+    ],
+    facts: [
+      { label: 'Cliente', value: 'ZIPO, músico y promotor de eventos' },
+      { label: 'Alcance', value: 'Rebranding, logotipo, aplicación a merch' },
+      { label: 'Proceso', value: 'Ilustración a mano → vectorización' },
+      { label: 'Herramientas', value: 'Photoshop, Illustrator' },
+      { label: 'Relación', value: 'Cliente recurrente desde 2024' },
     ],
     cover: 'zipo/zipo-poster-2024',
     hero: ['zipo/zipo-merch-design', 'Diseño de merch de ZIPO'],

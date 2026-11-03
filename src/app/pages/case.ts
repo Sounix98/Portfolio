@@ -181,6 +181,7 @@ export class Case {
   protected readonly meta = computed<string[][]>(() => {
     const p = this.project();
     if (!p) return [];
+    if (p.facts) return p.facts.map((f) => [f.label, f.value]);
     const rows = [
       [this.ui().client, p.client],
       [this.ui().year, p.year],
