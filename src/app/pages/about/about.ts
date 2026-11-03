@@ -32,6 +32,7 @@ import {
         <div class="w-full pt-28 lg:w-[48.5%] lg:min-w-0">
           <section aria-labelledby="about-title">
             <app-statement-reveal headingId="about-title" [text]="site.statement" />
+            <p class="t-body mt-6 max-w-[520px] text-soft">{{ site.statementSubtitle }}</p>
             <p class="mt-[clamp(56px,8vw,120px)] max-w-[420px] text-[16px] leading-[1.55] text-soft">
               {{ site.statementParagraph }}
             </p>
@@ -65,6 +66,7 @@ import {
 
           <section aria-labelledby="contact-title" class="mb-[clamp(110px,14vw,200px)] mt-[clamp(110px,14vw,200px)] max-w-[655px]">
             <h2 id="contact-title" class="t-h2 mb-6">{{ ui.contact }}</h2>
+            <p class="t-body mb-6 max-w-[520px] text-soft">{{ site.contactIntro }}</p>
             <app-contact-rows />
           </section>
         </div>
@@ -78,7 +80,7 @@ import {
         </div>
       </div>
     </main>
-    <app-footer [logoBand]="true" />
+    <app-footer />
   `,
 })
 export class About {

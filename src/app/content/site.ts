@@ -13,15 +13,16 @@ export const site = {
   whatsapp: 'https://wa.me/584148812017',
   year: 2026,
   description:
-    'Portafolio de Sounix Romero: diseñador gráfico y UX/UI en Puerto Ordaz, Venezuela. Identidades, campañas e interfaces que diseño y programo.',
+    'Diseño marcas y productos digitales. Y los llevo a código. Sounix Romero, diseñador y director de arte en Puerto Ordaz, Venezuela · trabajo remoto.',
   heroSubtitle:
     'Diseño marcas con carácter y productos digitales que se entienden. De la identidad visual a la interfaz en código.',
   worksDescription:
     'Identidades, campañas, catálogos e interfaces. De mi marca propia a proyectos para clientes en Venezuela, Puerto Rico y Latinoamérica.',
-  statement:
-    'Soy Sounix Romero, diseñador gráfico y UX/UI en Puerto Ordaz, Venezuela. Llevo 10 años creando identidades, campañas y, hoy, interfaces que diseño y programo con apoyo de IA.',
+  statement: 'Diseño marcas y productos digitales. Y los llevo a código.',
+  statementSubtitle: 'Sounix Romero — diseñador y director de arte. Puerto Ordaz, Venezuela · trabajo remoto.',
   statementParagraph:
-    'Empecé diseñando antes de graduarme y no he parado. Pasé por pantallas LED de eventos masivos, campañas para Mercado Libre y TuCarro, y marcas de streetwear con identidad propia. Hoy diseño y programo productos digitales en VEXBIZ.',
+    'Llevo 10 años diseñando piezas que tienen que funcionar en el mundo real: pantallas LED en eventos masivos, campañas de prevención de estafas para Mercado Libre, marcas de streetwear que viven en la calle. Hoy llevo esa exigencia a producto: en VEXBIZ rediseñé el flujo de compra y venta y lo construyo en Angular.',
+  contactIntro: 'Abierto a roles de producto en remoto y a proyectos de marca. Escríbeme por donde prefieras.',
 } as const;
 
 export const ui = {

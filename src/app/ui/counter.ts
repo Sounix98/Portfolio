@@ -12,7 +12,7 @@ export class Counter {
   readonly value = input.required<number>();
   readonly suffix = input('');
   private readonly current = signal<number | null>(null);
-  protected readonly n = computed(() => this.current() ?? Math.round(this.value() * 0.6));
+  protected readonly n = computed(() => this.current() ?? this.value());
 
   protected start() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {

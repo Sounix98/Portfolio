@@ -6,25 +6,25 @@ export const expertise: Expertise[] = [
   {
     label: 'BRANDING',
     title: 'Identidad, lettering y rebranding',
-    text: 'Logotipos y sistemas visuales con carácter: de NTAC y ZIPO a un rebranding que sigue vigente.',
+    text: 'Sistemas visuales con carácter para NTAC y ZIPO, y el rebranding de Ovejero Uniformes, aún en uso.',
     logos: [clientLogo('zipo', 'ZIPO')],
   },
   {
     label: 'DIRECCIÓN CREATIVA',
-    title: 'Conceptos, personajes e ilustración',
-    text: 'La idea central y la dirección de arte de proyectos como La Festa Fest.',
+    title: 'Concepto y dirección de arte',
+    text: 'Defino la idea central y dirijo la ejecución visual, como en La Festa Fest.',
     logos: [clientLogo('ntac', 'NTAC')],
   },
   {
     label: 'UX/UI',
     title: 'Interfaces que llevo a código',
-    text: 'Flujos, arquitectura de información y diseño de pantallas, con frontend en Angular.',
+    text: 'Flujos, arquitectura de información y pantallas que implemento yo mismo en Angular.',
     logos: [clientLogo('vexbiz', 'VEXBIZ')],
   },
   {
     label: 'REDES Y CONTENIDO',
-    title: 'Campañas, catálogos y piezas para redes',
-    text: 'Carruseles, catálogos técnicos y contenido para marcas de tecnología, turismo y más.',
+    title: 'Campañas, catálogos y redes',
+    text: 'Campañas, catálogos técnicos y contenido para marcas de tecnología y turismo.',
     logos: [clientLogo('mercado-libre', 'Mercado Libre'), clientLogo('tucarro', 'TuCarro')],
   },
 ];
@@ -32,7 +32,7 @@ export const expertise: Expertise[] = [
 export type Stat = { value: number; suffix?: string; label: string };
 
 export const stats: Stat[] = [
-  { value: 10, label: 'AÑOS DE EXPERIENCIA' },
-  { value: 39, label: 'PÁGINAS DE CATÁLOGO PARA LEDCO' },
-  { value: 5, label: 'CUENTAS GESTIONADAS EN 2025' },
+  { value: 10, label: 'años diseñando' },
+  { value: 12, label: 'marcas atendidas' },
+  { value: 5, suffix: '\u00a0h', label: 'semanales ahorradas con automatización' },
 ];

@@ -168,14 +168,15 @@ export class TestimonialsCarousel {
   template: `<div class="marquee mask-fade-x overflow-hidden" appInView margin="0px" aria-label="Clientes">
     <ul class="marquee-track m-0 list-none p-0">
       @for (n of list; track $index) {
-        <li class="flex h-10 shrink-0 items-center px-9 opacity-60">
-          <img [src]="n.src" [alt]="n.name" [width]="n.w" [height]="n.h" [style.height.px]="n.dh" class="w-auto" loading="eager" />
+        <li class="flex h-10 shrink-0 items-center px-9 opacity-60" [attr.aria-hidden]="$index >= count ? 'true' : null">
+          <img [src]="n.src" [alt]="$index < count ? n.name : ''" [attr.aria-hidden]="$index >= count ? 'true' : null" [width]="n.w" [height]="n.h" [style.height.px]="n.dh" class="w-auto" loading="eager" />
         </li>
       }
     </ul>
   </div>`,
 })
 export class LogoMarquee {
+  protected readonly count = clientLogos.length;
   protected readonly list = [...clientLogos, ...clientLogos];
 }
 
