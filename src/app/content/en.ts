@@ -36,6 +36,7 @@ export const uiEn: UiCopy = {
   year: 'YEAR',
   role: 'ROLE',
   type: 'TYPE',
+  tools: 'TOOLS',
   links: 'LINKS',
   nextProject: 'Next project',
   expertise: 'MY EXPERTISE',

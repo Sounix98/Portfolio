@@ -24,6 +24,8 @@ export type Project = {
   process: ProcessStep[];
   /** Si existe, sustituye a las filas por defecto (cliente, año, rol, tipo) de la ficha del caso. */
   facts?: { label: string; value: string }[];
+  /** Herramientas del proyecto (se añade como última fila de la ficha). */
+  tools?: string;
   links?: { label: string; url: string }[];
   cover: Pic;
   /** Si existe, el fondo del hero rota entre estas imágenes (la primera es la portada). */
@@ -78,6 +80,7 @@ export const projects: Project[] = [
     tagline: 'Un marketplace B2B más claro, llevado a código.',
     client: 'VEXBIZ',
     role: 'UX/UI, dirección de arte y frontend',
+    tools: 'Figma, Photoshop (maquetación), Angular',
     intro:
       'VEXBIZ es un marketplace B2B que reúne tiendas verificadas de refrigeración, automotriz, ferretería, farmacias, industrial, paneles solares y más, con pago protegido hasta la entrega.',
     premise: {
@@ -130,6 +133,7 @@ export const projects: Project[] = [
     label: 'Marca propia',
     client: 'NTAC (marca propia)',
     role: 'Dirección creativa, identidad, ilustración, UX y frontend',
+    tools: 'Photoshop, Illustrator, Figma',
     intro:
       'NTAC (Never Trust A Cop) es mi marca de streetwear y graffiti desde Puerto Ordaz: prendas oversized de algodón 220 g intervenidas con stencil, tinta textil y curado a mano.',
     premise: {
@@ -229,6 +233,7 @@ export const projects: Project[] = [
     tagline: 'Catálogo técnico y campaña para pantallas LED.',
     client: 'LEDCO (Puerto Rico)',
     role: 'Diseñador gráfico, remoto',
+    tools: 'Photoshop',
     intro:
       'LEDCO (antes LED Factory) es una empresa de Puerto Rico que vende pantallas LED indoor y outdoor y televisores para exteriores. Su lema: «Create your Vision».',
     premise: {
@@ -276,8 +281,9 @@ export const projects: Project[] = [
     label: 'Proyecto conceptual',
     client: 'Proyecto conceptual',
     role: 'Dirección creativa, identidad, ilustración y personajes',
+    tools: 'Photoshop, Illustrator',
     intro:
-      'La Festa Fest es un festival musical ficticio, creado como ejercicio de dirección creativa.',
+      'La Festa Fest no existe: es un festival musical ficticio que creé como ejercicio de dirección creativa, diseñándolo como si fuera real.',
     premise: {
       title: 'La identidad completa de un evento',
       paragraphs: [
@@ -289,6 +295,12 @@ export const projects: Project[] = [
       { title: 'Logotipo', text: 'Lettering «bubble» con la fecha del evento.' },
       { title: 'Key visual', text: 'Escenario ilustrado con hormigas cargando la estructura.' },
       { title: 'Personajes', text: 'FeStar, Skitt y Beatzzy, presentados como polaroids.' },
+    ],
+    facts: [
+      { label: 'Cliente', value: 'Proyecto conceptual' },
+      { label: 'Alcance', value: 'Dirección creativa, logotipo, key visual y personajes' },
+      { label: 'Proceso', value: 'Lettering bubble → ilustración → personajes' },
+      { label: 'Año', value: '2025' },
     ],
     cover: 'la-festa-fest/la-festa-fest-key-visual',
     gallery: [
@@ -308,6 +320,7 @@ export const projects: Project[] = [
     label: 'Cliente recurrente',
     client: 'ZIPO',
     role: 'Rebranding, logotipo y aplicación a merch',
+    tools: 'Photoshop, Illustrator',
     intro:
       'ZIPO se mueve entre la música, los negocios y la producción de eventos. Necesitaba una imagen que funcionara igual en una franela, un flyer o una tarima, y que se sintiera suya, no de catálogo.',
     premise: {
@@ -327,7 +340,6 @@ export const projects: Project[] = [
       { label: 'Cliente', value: 'ZIPO, músico y promotor de eventos' },
       { label: 'Alcance', value: 'Rebranding, logotipo, aplicación a merch' },
       { label: 'Proceso', value: 'Ilustración a mano → vectorización' },
-      { label: 'Herramientas', value: 'Photoshop, Illustrator' },
       { label: 'Relación', value: 'Cliente recurrente desde 2024' },
     ],
     cover: 'zipo/zipo-poster-2024',
@@ -347,12 +359,13 @@ export const projects: Project[] = [
     tagline: 'Carruseles que venden: tecnología, turismo y más.',
     client: 'Café Marketing',
     role: 'Diseñador y community manager',
+    tools: 'Photoshop',
     intro:
-      'Durante 2025 fui diseñador y community manager en Café Marketing, con 5 cuentas de clientes locales.',
+      'Durante 2025 fui diseñador y community manager en Café Marketing, una agencia, con 5 cuentas de clientes locales.',
     premise: {
       title: 'Contenido para cuentas muy distintas',
       paragraphs: [
-        'Diseñé contenido, carruseles y campañas para Nanologic (tecnología), D’Viajes (turismo) y la propia agencia.',
+        'Cada cuenta le hablaba a un público distinto (tecnología, turismo y la propia agencia), así que el diseño y el tono cambiaban de una a otra.',
         'Nanologic: carrusel de Día del Padre, delivery gratis y servicio técnico con humor. D’Viajes: Plan Bad Bunny Medellín 2026 y rutas aéreas desde Puerto Ordaz. Café Marketing: planes y servicios («No lo dejes medio vacío… Llénalo y crece»).',
       ],
     },
@@ -360,6 +373,12 @@ export const projects: Project[] = [
       { title: 'Nanologic', text: 'Carrusel Día del Padre, delivery gratis y servicio técnico.' },
       { title: 'D’Viajes', text: 'Plan Bad Bunny Medellín 2026 y rutas aéreas desde Puerto Ordaz.' },
       { title: 'Café Marketing', text: 'Campaña de planes y servicios de la propia agencia.' },
+    ],
+    facts: [
+      { label: 'Cliente', value: 'Café Marketing y sus cuentas: Nanologic, D’Viajes' },
+      { label: 'Alcance', value: 'Diseño de contenido, carruseles, campañas y community management' },
+      { label: 'Cuentas', value: '5 cuentas de clientes locales' },
+      { label: 'Año', value: '2025' },
     ],
     cover: 'cafe-marketing/cafemkt-promo-01-llenalo-y-crece',
     hero: ['cafe-marketing/dviajes-plan-bad-bunny-01-portada', 'D’Viajes: Plan Bad Bunny, portada'],
@@ -384,20 +403,31 @@ export const projects: Project[] = [
     title: 'Ovejero Uniformes',
     year: '2019',
     category: 'Branding',
-    tagline: 'Un rebranding que sigue vigente hoy.',
+    tagline: 'Un rebranding que la marca sigue usando hoy.',
     client: 'Ovejero Uniformes',
     role: 'Rebranding (pasantía universitaria)',
-    intro: 'Mi pasantía universitaria en Ovejero Uniformes, entre 2018 y 2019, fue un rebranding completo.',
+    tools: 'Photoshop, Illustrator',
+    intro:
+      'Ovejero Uniformes usaba como logo la palabra «Ovejero» escrita en Jokerman. En mi pasantía universitaria, entre 2018 y 2019, me tocó rehacer toda su imagen.',
     premise: {
       title: 'Una identidad que sigue en uso',
       paragraphs: [
-        'Diseñé el logotipo con ícono de oveja, sus versiones de color y la papelería. La identidad sigue siendo la imagen oficial de la empresa hoy.',
+        'Diseñé el logotipo con un ícono de oveja, sus versiones de color para distintos fondos y la papelería, y adapté el diseño para bordado.',
+        'Hoy esa identidad está en toda su imagen: los uniformes del personal, el rotulado de máquinas, las redes sociales y un letrero nuevo en relieve en la vidriera de la tienda.',
       ],
     },
     process: [
+      { title: 'Punto de partida', text: 'Su logo era la palabra «Ovejero» escrita en Jokerman.' },
       { title: 'Logotipo', text: 'Logotipo con ícono de oveja.' },
       { title: 'Versiones de color', text: 'Variantes para distintos fondos y usos.' },
       { title: 'Papelería', text: 'Aplicación de la identidad en papelería.' },
+      { title: 'Bordado', text: 'Diseño adaptado para bordado.' },
+    ],
+    facts: [
+      { label: 'Cliente', value: 'Ovejero Uniformes' },
+      { label: 'Alcance', value: 'Rebranding: logotipo, versiones de color, papelería y diseño para bordado' },
+      { label: 'Relación', value: 'Pasantía universitaria, 2018–2019' },
+      { label: 'Vigencia', value: 'Uniformes, rotulado de máquinas, redes sociales y letrero en relieve de la tienda' },
     ],
     cover: 'branding/ovejero-uniformes',
     gallery: [['branding/ovejero-uniformes', 'Lámina de rebranding de Ovejero Uniformes']],
@@ -410,17 +440,25 @@ export const projects: Project[] = [
     tagline: 'Campañas y tutoriales para dos marcas grandes.',
     client: 'Mercado Libre VE (vía agencia) y TuCarro.com',
     role: 'Diseñador gráfico',
+    tools: 'Photoshop',
     intro:
-      'En 2022 diseñé piezas para Mercado Libre Venezuela, a través de una agencia, y para TuCarro.com, directamente, durante 6 meses.',
+      'En 2022 trabajé para dos marcas grandes: Mercado Libre Venezuela, a través de una agencia, y TuCarro.com, directamente, durante 6 meses.',
     premise: {
       title: 'Marcas grandes, mensajes claros',
       paragraphs: [
-        'Para Mercado Libre diseñé piezas de prevención de estafas y de tiendas oficiales (LG). Para TuCarro, campañas, tutoriales e historias.',
+        'Para Mercado Libre diseñé campañas muy puntuales: prevención de estafas, donde el mensaje tiene que entenderse de un vistazo, y promociones como Black Friday y descuentos.',
+        'Para la tienda oficial de LG diseñé las piezas de sus productos que Mercado Libre promocionaba en Instagram. Para TuCarro, durante 6 meses: campañas, tutoriales e historias.',
       ],
     },
     process: [
-      { title: 'Mercado Libre VE', text: 'Prevención de estafas y tiendas oficiales.' },
+      { title: 'Mercado Libre VE', text: 'Prevención de estafas, promociones y descuentos, y piezas de producto de LG para Instagram.' },
       { title: 'TuCarro', text: 'Campañas, tutoriales e historias durante 6 meses.' },
+    ],
+    facts: [
+      { label: 'Cliente', value: 'Mercado Libre Venezuela (vía agencia) y TuCarro.com' },
+      { label: 'Alcance', value: 'Prevención de estafas, promociones, piezas de producto LG, y campañas, tutoriales e historias' },
+      { label: 'Relación', value: 'Agencia (Mercado Libre) · directo, 6 meses (TuCarro)' },
+      { label: 'Año', value: '2022' },
     ],
     cover: 'mercadolibre-tucarro/tucarro-promo',
     hero: ['mercadolibre-tucarro/tucarro-tutorial-moto', 'TuCarro: tutorial de moto'],
@@ -439,12 +477,28 @@ export const projects: Project[] = [
     tagline: 'Portadas para artistas independientes.',
     client: 'Artistas independientes',
     role: 'Diseño de portadas e ilustración',
-    intro: 'Portadas para artistas: Landeau, Daerel (Big City y Honey), RK Wavy ft. Iverson, M4CO y Waze (Daydream).',
+    tools: 'Photoshop',
+    intro:
+      'Una portada es lo primero que se ve de una canción. Estas son las de artistas independientes: Landeau, Daerel (Big City y Honey), RK Wavy ft. Iverson, M4CO y Waze (Daydream).',
     premise: {
       title: 'Una imagen para cada canción',
-      paragraphs: ['Cada portada se trabajó según el carácter del artista y de la canción.'],
+      paragraphs: [
+        'Cada portada se trabajó según el carácter del artista y de la canción, sin repetir una fórmula.',
+        'Si el artista llega con algo claro, lo traduzco al papel tal como lo visualizo y lo escucho. Si tengo libertad, me conecto con la situación que plantea la canción. Siempre hago tres bocetos y parto del que escoge el artista.',
+      ],
     },
-    process: [],
+    process: [
+      { title: 'Escuchar y visualizar', text: 'Traduzco al papel lo que el artista tiene claro, o lo que me transmite la situación de la canción.' },
+      { title: 'Tres bocetos', text: 'Presento tres propuestas al artista.' },
+      { title: 'La elegida', text: 'Desarrollo la portada a partir del boceto que él escoge.' },
+    ],
+    facts: [
+      { label: 'Cliente', value: 'Artistas independientes' },
+      { label: 'Alcance', value: 'Diseño de portadas e ilustración' },
+      { label: 'Proceso', value: 'Tres bocetos → el artista elige → portada' },
+      { label: 'Artistas', value: 'Landeau, Daerel, RK Wavy ft. Iverson, M4CO, Waze' },
+      { label: 'Año', value: '2022' },
+    ],
     cover: 'portadas-musicales/daerel-big-city',
     hero: ['portadas-musicales/daerel-big-city', 'Portada de Daerel: Big City'],
     gallery: [
@@ -464,12 +518,21 @@ export const projects: Project[] = [
     tagline: 'Identidades para negocios y marcas nuevas.',
     client: 'Kryss Cakes, TAI Studio, Four-Two, Santuario y Chaporro',
     role: 'Identidad visual',
-    intro: 'Identidades para Kryss Cakes, TAI Studio, Four-Two Streetwear, Santuario Streetwear y Chaporro.',
+    tools: 'Photoshop, Illustrator',
+    intro:
+      'Cinco marcas, cinco negocios distintos: Kryss Cakes, TAI Studio, Four-Two Streetwear, Santuario Streetwear (una marca de streetwear de Maracay) y Chaporro (un editor de VFX). Para cada una construí una identidad a su medida.',
     premise: {
       title: 'Cada marca, a su manera',
-      paragraphs: ['Cada identidad se definió según la naturaleza del negocio y de su público.'],
+      paragraphs: [
+        'Cada identidad se definió según la naturaleza del negocio y de su público: una repostería, un estudio, un editor de VFX y marcas de streetwear no pueden hablar igual.',
+      ],
     },
     process: [],
+    facts: [
+      { label: 'Cliente', value: 'Kryss Cakes, TAI Studio, Four-Two, Santuario y Chaporro' },
+      { label: 'Alcance', value: 'Identidad visual' },
+      { label: 'Año', value: '2022' },
+    ],
     cover: 'branding/kryss-cakes',
     hero: ['flyers/photo_2021-08-09_19-49-03', 'Logotipo de Santuario Streetwear 2021'],
     gallery: [
@@ -489,6 +552,7 @@ export const projects: Project[] = [
     tagline: 'Flyers y contenido para eventos de la escena local.',
     client: 'Rimastería, Last Food of the Year, Xperimental Battles, Bazar de emprendimientos y Daydream',
     role: 'Diseño de flyers y contenido para redes',
+    tools: 'Photoshop',
     intro:
       'Flyers y contenido para redes de eventos locales: la serie de la Jornada 1 de Rimastería, el Bazar de emprendimientos en Lechería, Last Food of the Year, Xperimental Battles y el lineup de Daydream.',
     premise: {

@@ -181,13 +181,15 @@ export class Case {
   protected readonly meta = computed<string[][]>(() => {
     const p = this.project();
     if (!p) return [];
-    if (p.facts) return p.facts.map((f) => [f.label, f.value]);
-    const rows = [
-      [this.ui().client, p.client],
-      [this.ui().year, p.year],
-      [this.ui().role, p.role],
-    ];
-    if (p.label) rows.push([this.ui().type, p.label]);
+    const rows = p.facts
+      ? p.facts.map((f) => [f.label, f.value])
+      : [
+          [this.ui().client, p.client],
+          [this.ui().year, p.year],
+          [this.ui().role, p.role],
+        ];
+    if (!p.facts && p.label) rows.push([this.ui().type, p.label]);
+    if (p.tools) rows.push([this.ui().tools, p.tools]);
     return rows;
   });
 

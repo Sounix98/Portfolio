@@ -31,6 +31,7 @@ export type UiCopy = {
   year: string;
   role: string;
   type: string;
+  tools: string;
   links: string;
   nextProject: string;
   expertise: string;
@@ -92,6 +93,7 @@ export const ui: UiCopy = {
   year: 'AÑO',
   role: 'ROL',
   type: 'TIPO',
+  tools: 'HERRAMIENTAS',
   links: 'ENLACES',
   nextProject: 'Siguiente proyecto',
   expertise: 'MI EXPERTISE',

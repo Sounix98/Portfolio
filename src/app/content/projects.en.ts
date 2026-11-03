@@ -10,6 +10,7 @@ export type ProjectText = {
   premise: { title: string; paragraphs: string[] }; // same number of paragraphs as the Spanish
   process: { title: string; text: string }[]; // same number and order of steps as the Spanish ([] if Spanish is [])
   facts?: { label: string; value: string }[]; // only for projects with a custom fact sheet in Spanish
+  tools?: string;
 };
 
 export const projectsEn: Record<string, ProjectText> = {
@@ -19,6 +20,7 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'A clearer B2B marketplace, built in code.',
     client: 'VEXBIZ',
     role: 'UX/UI, art direction and frontend',
+    tools: 'Figma, Photoshop (layout), Angular',
     intro:
       'VEXBIZ is a B2B marketplace that brings together verified stores for refrigeration, automotive, hardware, pharmacies, industrial supplies, solar panels and more, with payment protected until delivery.',
     premise: {
@@ -41,6 +43,7 @@ export const projectsEn: Record<string, ProjectText> = {
     label: 'Own brand',
     client: 'NTAC (own brand)',
     role: 'Creative direction, identity, illustration, UX and frontend',
+    tools: 'Photoshop, Illustrator, Figma',
     intro:
       'NTAC (Never Trust A Cop) is my streetwear and graffiti brand from Puerto Ordaz: oversized 220 gsm cotton garments customized with stencils, textile ink and hand curing.',
     premise: {
@@ -64,6 +67,7 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'Technical catalog and campaign for LED screens.',
     client: 'LEDCO (Puerto Rico)',
     role: 'Graphic designer, remote',
+    tools: 'Photoshop',
     intro:
       'LEDCO (formerly LED Factory) is a Puerto Rico company that sells indoor and outdoor LED screens and outdoor TVs. Its tagline: “Create your Vision.”',
     premise: {
@@ -87,7 +91,9 @@ export const projectsEn: Record<string, ProjectText> = {
     label: 'Concept project',
     client: 'Concept project',
     role: 'Creative direction, identity, illustration and characters',
-    intro: 'La Festa Fest is a fictional music festival, created as a creative direction exercise.',
+    tools: 'Photoshop, Illustrator',
+    intro:
+      'La Festa Fest doesn’t exist: it’s a fictional music festival I created as a creative direction exercise, designing it as if it were real.',
     premise: {
       title: 'The complete identity of an event',
       paragraphs: [
@@ -100,6 +106,12 @@ export const projectsEn: Record<string, ProjectText> = {
       { title: 'Key visual', text: 'An illustrated stage with ants carrying the structure.' },
       { title: 'Characters', text: 'FeStar, Skitt and Beatzzy, presented as polaroids.' },
     ],
+    facts: [
+      { label: 'Client', value: 'Concept project' },
+      { label: 'Scope', value: 'Creative direction, logo, key visual and characters' },
+      { label: 'Process', value: 'Bubble lettering → illustration → characters' },
+      { label: 'Year', value: '2025' },
+    ],
   },
   zipo: {
     title: 'ZIPO',
@@ -108,6 +120,7 @@ export const projectsEn: Record<string, ProjectText> = {
     label: 'Returning client',
     client: 'ZIPO',
     role: 'Rebrand, logo and merch application',
+    tools: 'Photoshop, Illustrator',
     intro:
       'ZIPO moves between music, business and event production. He needed an image that would work the same on a T-shirt, a flyer or a stage, and that felt like his own, not off the shelf.',
     premise: {
@@ -127,7 +140,6 @@ export const projectsEn: Record<string, ProjectText> = {
       { label: 'Client', value: 'ZIPO, musician and event promoter' },
       { label: 'Scope', value: 'Rebrand, logo, merch application' },
       { label: 'Process', value: 'Hand illustration → vectorization' },
-      { label: 'Tools', value: 'Photoshop, Illustrator' },
       { label: 'Relationship', value: 'Returning client since 2024' },
     ],
   },
@@ -137,11 +149,13 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'Carousels that sell: tech, travel and more.',
     client: 'Café Marketing',
     role: 'Designer and community manager',
-    intro: 'During 2025 I worked as a designer and community manager at Café Marketing, handling 5 local client accounts.',
+    tools: 'Photoshop',
+    intro:
+      'During 2025 I was a designer and community manager at Café Marketing, an agency, handling 5 local client accounts.',
     premise: {
       title: 'Content for very different accounts',
       paragraphs: [
-        'I designed content, carousels and campaigns for Nanologic (technology), D’Viajes (travel) and the agency itself.',
+        'Each account spoke to a different audience (technology, travel and the agency itself), so the design and tone changed from one to the next.',
         'Nanologic: a Father’s Day carousel, free delivery, and a tech support piece with humor. D’Viajes: the Bad Bunny Medellín 2026 plan and flight routes from Puerto Ordaz. Café Marketing: plans and services (“No lo dejes medio vacío… Llénalo y crece” (“Don’t leave it half empty… Fill it up and grow”)).',
       ],
     },
@@ -150,24 +164,41 @@ export const projectsEn: Record<string, ProjectText> = {
       { title: 'D’Viajes', text: 'The Bad Bunny Medellín 2026 plan and flight routes from Puerto Ordaz.' },
       { title: 'Café Marketing', text: 'A campaign for the agency’s own plans and services.' },
     ],
+    facts: [
+      { label: 'Client', value: 'Café Marketing and its accounts: Nanologic, D’Viajes' },
+      { label: 'Scope', value: 'Content design, carousels, campaigns and community management' },
+      { label: 'Accounts', value: '5 local client accounts' },
+      { label: 'Year', value: '2025' },
+    ],
   },
   'ovejero-uniformes': {
     title: 'Ovejero Uniformes',
     category: 'Branding',
-    tagline: 'A rebrand that is still in use today.',
+    tagline: 'A rebrand the company still uses today.',
     client: 'Ovejero Uniformes',
     role: 'Rebranding (university internship)',
-    intro: 'My university internship at Ovejero Uniformes, between 2018 and 2019, was a complete rebrand.',
+    tools: 'Photoshop, Illustrator',
+    intro:
+      'Ovejero Uniformes used the word “Ovejero” set in Jokerman as its logo. During my university internship, between 2018 and 2019, I rebuilt its entire image.',
     premise: {
       title: 'An identity that is still in use',
       paragraphs: [
-        'I designed the logo with a sheep icon, its color versions and the stationery. The identity is still the company’s official image today.',
+        'I designed the logo with a sheep icon, its color versions for different backgrounds and the stationery, and adapted the design for embroidery.',
+        'Today that identity runs through its entire image: staff uniforms, machine labeling, social media and a new relief sign in the store window.',
       ],
     },
     process: [
+      { title: 'Starting point', text: 'Its logo was the word “Ovejero” set in Jokerman.' },
       { title: 'Logo', text: 'A logo with a sheep icon.' },
       { title: 'Color versions', text: 'Variants for different backgrounds and uses.' },
       { title: 'Stationery', text: 'The identity applied to stationery.' },
+      { title: 'Embroidery', text: 'Design adapted for embroidery.' },
+    ],
+    facts: [
+      { label: 'Client', value: 'Ovejero Uniformes' },
+      { label: 'Scope', value: 'Rebrand: logo, color versions, stationery and embroidery-ready design' },
+      { label: 'Relationship', value: 'University internship, 2018–2019' },
+      { label: 'Status', value: 'Staff uniforms, machine labeling, social media and the store’s relief sign' },
     ],
   },
   'mercado-libre-tucarro': {
@@ -176,17 +207,25 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'Campaigns and tutorials for two major brands.',
     client: 'Mercado Libre VE (via agency) and TuCarro.com',
     role: 'Graphic designer',
+    tools: 'Photoshop',
     intro:
-      'In 2022 I designed pieces for Mercado Libre Venezuela, through an agency, and for TuCarro.com, directly, over 6 months.',
+      'In 2022 I worked for two major brands: Mercado Libre Venezuela, through an agency, and TuCarro.com, directly, for 6 months.',
     premise: {
       title: 'Major brands, clear messages',
       paragraphs: [
-        'For Mercado Libre I designed scam-prevention pieces and official store pieces (LG). For TuCarro, campaigns, tutorials and stories.',
+        'For Mercado Libre I designed very targeted campaigns: scam prevention, where the message has to land at a glance, and promotions like Black Friday and discounts.',
+        'For LG’s official store I designed the pieces for its products that Mercado Libre promoted on Instagram. For TuCarro, over 6 months: campaigns, tutorials and stories.',
       ],
     },
     process: [
-      { title: 'Mercado Libre VE', text: 'Scam prevention and official stores.' },
+      { title: 'Mercado Libre VE', text: 'Scam prevention, promotions and discounts, and LG product pieces for Instagram.' },
       { title: 'TuCarro', text: 'Campaigns, tutorials and stories over 6 months.' },
+    ],
+    facts: [
+      { label: 'Client', value: 'Mercado Libre Venezuela (via agency) and TuCarro.com' },
+      { label: 'Scope', value: 'Scam prevention, promotions, LG product pieces, and campaigns, tutorials and stories' },
+      { label: 'Relationship', value: 'Agency (Mercado Libre) · direct, 6 months (TuCarro)' },
+      { label: 'Year', value: '2022' },
     ],
   },
   'portadas-musicales': {
@@ -195,12 +234,28 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'Cover art for independent artists.',
     client: 'Independent artists',
     role: 'Cover design and illustration',
-    intro: 'Cover art for Landeau, Daerel (Big City and Honey), RK Wavy ft. Iverson, M4CO and Waze (Daydream).',
+    tools: 'Photoshop',
+    intro:
+      'A cover is the first thing people see of a song. These are for independent artists: Landeau, Daerel (Big City and Honey), RK Wavy ft. Iverson, M4CO and Waze (Daydream).',
     premise: {
       title: 'An image for every song',
-      paragraphs: ['Each cover was developed around the character of the artist and the song.'],
+      paragraphs: [
+        'Each cover was developed around the character of the artist and the song, without repeating a formula.',
+        'If the artist comes with something clear, I translate it to paper just as I picture and hear it. If I have freedom, I connect with the situation the song describes. I always make three sketches and start from the one the artist picks.',
+      ],
     },
-    process: [],
+    process: [
+      { title: 'Listen and visualize', text: 'I translate to paper what the artist has in mind, or what the song’s situation conveys to me.' },
+      { title: 'Three sketches', text: 'I present three proposals to the artist.' },
+      { title: 'The chosen one', text: 'I develop the cover from the sketch they pick.' },
+    ],
+    facts: [
+      { label: 'Client', value: 'Independent artists' },
+      { label: 'Scope', value: 'Cover design and illustration' },
+      { label: 'Process', value: 'Three sketches → the artist chooses → cover' },
+      { label: 'Artists', value: 'Landeau, Daerel, RK Wavy ft. Iverson, M4CO, Waze' },
+      { label: 'Year', value: '2022' },
+    ],
   },
   'branding-de-marcas': {
     title: 'Brand Identities',
@@ -208,12 +263,21 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'Identities for businesses and new brands.',
     client: 'Kryss Cakes, TAI Studio, Four-Two, Santuario and Chaporro',
     role: 'Visual identity',
-    intro: 'Identities for Kryss Cakes, TAI Studio, Four-Two Streetwear, Santuario Streetwear and Chaporro.',
+    tools: 'Photoshop, Illustrator',
+    intro:
+      'Five brands, five different businesses: Kryss Cakes, TAI Studio, Four-Two Streetwear, Santuario Streetwear (a streetwear brand from Maracay) and Chaporro (a VFX editor). For each one I built an identity tailored to it.',
     premise: {
       title: 'Each brand, in its own way',
-      paragraphs: ['Each identity was defined around the nature of the business and its audience.'],
+      paragraphs: [
+        'Each identity was defined around the nature of the business and its audience: a cake shop, a studio, a VFX editor and streetwear brands can’t all speak the same way.',
+      ],
     },
     process: [],
+    facts: [
+      { label: 'Client', value: 'Kryss Cakes, TAI Studio, Four-Two, Santuario and Chaporro' },
+      { label: 'Scope', value: 'Visual identity' },
+      { label: 'Year', value: '2022' },
+    ],
   },
   'flyers-de-eventos': {
     title: 'Event Flyers',
@@ -221,6 +285,7 @@ export const projectsEn: Record<string, ProjectText> = {
     tagline: 'Flyers and content for local scene events.',
     client: 'Rimastería, Last Food of the Year, Xperimental Battles, Bazar de emprendimientos and Daydream',
     role: 'Flyer design and social media content',
+    tools: 'Photoshop',
     intro:
       'Flyers and social media content for local events: the Rimastería Round 1 series, the Bazar de emprendimientos (small business market) in Lechería, Last Food of the Year, Xperimental Battles and the Daydream lineup.',
     premise: {
