@@ -237,7 +237,7 @@ export const projects: Project[] = [
       { title: 'Campaña PoolPRO QLED', text: 'Lanzamiento, beneficios, comparativa con TV tradicional, tamaños y CTA para pedir el catálogo por DM.' },
       { title: 'Identidad en Instagram', text: 'Íconos de highlights, post de logo y stories.' },
     ],
-    cover: 'ledco/catalogo/catalogo-01',
+    cover: 'ledco/banners/ledco-banner-01-sin-logo',
     gallery: [
       ['ledco/catalogo/catalogo-01', 'Portada del catálogo de productos de LEDCO'],
       ['ledco/catalogo/catalogo-03', 'Página del catálogo de LEDCO'],

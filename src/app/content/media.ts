@@ -152,6 +152,10 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1600,
     "h": 900
   },
+  "ledco/banners/ledco-banner-01-sin-logo": {
+    "w": 1600,
+    "h": 900
+  },
   "ledco/banners/ledco-banner-02": {
     "w": 1600,
     "h": 900
