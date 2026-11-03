@@ -17,38 +17,28 @@ import { NotFound } from './not-found';
     @if (project(); as p) {
       <main>
         <section #hero aria-labelledby="case-title" class="relative h-svh min-h-[560px] overflow-hidden">
-          <div #parallax [class]="p.heroBackdrop ? 'absolute -inset-y-[40%] inset-x-0' : 'absolute -inset-y-[10%] inset-x-0'">
-            @if (p.heroLogos) {
-              @if (p.heroBackdrop; as bd) {
-                <!-- pieza de la campaña desenfocada: arriba a la izquierda conserva su azul y en diagonal pasa al filtro amarillo → carmesí -->
-                <img [ngSrc]="bd.src" fill priority sizes="100vw" class="scale-125 object-cover blur-[36px] brightness-110 saturate-125" alt="" aria-hidden="true" />
-                <div aria-hidden="true" class="isolate absolute inset-0 [mask-image:linear-gradient(135deg,transparent_8%,black_62%)] [-webkit-mask-image:linear-gradient(135deg,transparent_8%,black_62%)]">
-                  <img [ngSrc]="bd.src" fill loading="eager" sizes="100vw" class="scale-125 object-cover blur-[36px] grayscale brightness-[2] contrast-[0.85]" alt="" aria-hidden="true" />
-                  <div class="absolute inset-0 mix-blend-multiply bg-[linear-gradient(135deg,#ffd400_0%,#f2b705_30%,#d9541a_62%,#a8122f_85%,#7d0826_100%)]"></div>
-                </div>
-              }
-            } @else if (p.heroSlides; as slides) {
-              @for (s of slides; track s.src; let i = $index) {
+          <div #parallax class="absolute -inset-y-[40%] inset-x-0">
+            @for (b of backdrops(); track b.src; let i = $index) {
+              <!-- fondo desenfocado: arriba a la izquierda conserva los colores de la imagen y en diagonal pasa al filtro de degradé -->
+              <div class="absolute inset-0" [class.hero-slide]="backdrops().length > 1" [class.is-active]="i === slide()" [attr.aria-hidden]="p.heroLogos ? 'true' : null">
                 <img
-                  [ngSrc]="s.src"
+                  [ngSrc]="b.src"
                   fill
                   [priority]="i === 0"
                   [loading]="i === 0 ? undefined : 'eager'"
                   sizes="100vw"
-                  class="hero-slide object-cover"
-                  [class.is-active]="i === slide()"
-                  [alt]="i === 0 ? s.alt : ''"
-                  [attr.aria-hidden]="i === slide() ? null : 'true'"
+                  class="scale-125 object-cover blur-[36px] brightness-110 saturate-125"
+                  [alt]="p.heroLogos || i > 0 ? '' : b.alt"
                 />
-              }
-            } @else {
-              <img [ngSrc]="p.cover.src" fill priority sizes="100vw" class="object-cover" [alt]="p.cover.alt" />
+                <div aria-hidden="true" class="isolate absolute inset-0 [mask-image:linear-gradient(135deg,transparent_8%,black_62%)] [-webkit-mask-image:linear-gradient(135deg,transparent_8%,black_62%)]">
+                  <img [ngSrc]="b.src" fill loading="eager" sizes="100vw" class="scale-125 object-cover blur-[36px] grayscale brightness-[2] contrast-[0.85]" alt="" />
+                  <div class="absolute inset-0 mix-blend-multiply" [style.background]="gradient(b)"></div>
+                </div>
+              </div>
             }
           </div>
-          <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]" [class.opacity-25]="!!p.heroBackdrop"></div>
-          @if (p.heroBackdrop) {
+          <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)] opacity-25"></div>
           <div aria-hidden="true" class="hero-noise absolute inset-0"></div>
-          }
           @if (p.heroLogos; as logos) {
             <div class="pointer-events-none absolute inset-x-0 top-[calc(5%+68px)] bottom-[61%] px-[var(--gutter)]">
               <div class="relative mx-auto h-full w-[min(360px,62vw)]">
@@ -209,6 +199,20 @@ export class Case {
   protected route = routes.work;
   protected readonly project = computed(() => this.i18n.project(this.slug()));
   protected readonly next = computed(() => this.i18n.nextProject(this.slug()));
+  /** Imágenes del fondo del hero: la pieza desenfocada (casos con logo) o las del carrusel / la portada. */
+  protected readonly backdrops = computed(() => {
+    const p = this.project();
+    if (!p) return [];
+    if (p.heroLogos) return p.heroBackdrop ? [p.heroBackdrop] : [];
+    return p.heroSlides ?? [p.cover];
+  });
+
+  /** Degradé en diagonal con los tonos de la imagen (amarillo → carmesí si no tiene). */
+  protected gradient(b: { tone?: string[] }): string {
+    const t = b.tone ?? ['#ffd400', '#f2b705', '#d9541a', '#a8122f'];
+    return `linear-gradient(135deg, ${t[0]} 0%, ${t[1]} 34%, ${t[2]} 68%, ${t[3]} 100%)`;
+  }
+
   protected readonly meta = computed<string[][]>(() => {
     const p = this.project();
     if (!p) return [];
@@ -242,7 +246,7 @@ export class Case {
       const hero = this.hero()?.nativeElement;
       const layer = this.parallax()?.nativeElement;
       if (!hero || !layer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const stop = scroll((p: number) => (layer.style.transform = `translateY(${p * (this.project()?.heroBackdrop ? 22 : 20)}%)`), {
+      const stop = scroll((p: number) => (layer.style.transform = `translateY(${p * (22)}%)`), {
         target: hero,
         offset: ['start start', 'end start'],
       });

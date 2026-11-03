@@ -1,7 +1,7 @@
 import { media } from './media';
 
 /** Imagen con dimensiones reales (generadas por `npm run images`). */
-export type Pic = { src: string; w: number; h: number; alt: string };
+export type Pic = { src: string; w: number; h: number; alt: string; /** Cuatro tonos (claro → oscuro) para el filtro del hero. */ tone?: string[] };
 
 export type ProcessStep = { title: string; text: string };
 
@@ -50,7 +50,7 @@ function pic(key: string, alt: string): Pic {
     // TODO: imagen pendiente (ver GUIA_PORTAFOLIO.md, sección 11).
     return { ...PLACEHOLDER, alt };
   }
-  return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt };
+  return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt, tone: m.tone };
 }
 
 type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'heroSlides' | 'heroLogos' | 'heroBackdrop'> & {
@@ -61,19 +61,21 @@ type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'her
   logos?: [string, string][];
   /** [clave, alt] de la imagen que se desenfoca detrás de los logos. */
   backdrop?: [string, string];
+  /** Tonos propios del filtro del hero (si no, se calculan de la imagen). */
+  tone?: string[];
   /** [clave, alt] de la miniatura; si falta, se usa la portada. */
   hero?: [string, string];
   gallery: [string, string][]; // [clave, alt]
   groups?: { title: string; items: [string, string][] }[];
 };
 
-const project = ({ cover, hero, slides, logos, backdrop, gallery, groups, ...seed }: Seed): Project => {
+const project = ({ cover, hero, slides, logos, backdrop, tone, gallery, groups, ...seed }: Seed): Project => {
   const galleryGroups = groups?.map((g) => ({ title: g.title, images: g.items.map(([k, alt]) => pic(k, alt)) }));
   return {
     ...seed,
     cover: pic(cover, seed.title),
     heroLogos: logos?.map(([k, alt]) => pic(k, alt)),
-    heroBackdrop: backdrop ? pic(backdrop[0], backdrop[1]) : undefined,
+    heroBackdrop: backdrop ? { ...pic(backdrop[0], backdrop[1]), ...(tone ? { tone } : {}) } : undefined,
     heroSlides: slides ? [pic(cover, seed.title), ...slides.map(([k, alt]) => pic(k, alt))] : undefined,
     thumb: hero ? pic(hero[0], hero[1]) : pic(cover, seed.title),
     gallery: galleryGroups ? galleryGroups.flatMap((g) => g.images) : gallery.map(([k, alt]) => pic(k, alt)),
@@ -441,6 +443,7 @@ export const projects: Project[] = [
     ],
     cover: 'branding/ovejero-laminas/ovejero-portada',
     logos: [['branding/hero/ovejero-logo-blanco', 'Logotipo de Ovejero Uniformes']],
+    backdrop: ['branding/ovejero-mocks/ovejero-tarjetas-oscuras', 'Ovejero Uniformes: tarjetas personales'],
     gallery: [
       ['branding/ovejero-laminas/ovejero-lamina-01-logotipo', 'Ovejero Uniformes: logotipo y paleta de color'],
       ['branding/ovejero-mocks/ovejero-tarjetas-oscuras', 'Ovejero Uniformes: tarjetas personales en azul marino con el patrón de la oveja'],
@@ -481,6 +484,7 @@ export const projects: Project[] = [
     cover: 'mercadolibre-tucarro/ml-portada',
     logos: [['branding/hero/mercado-libre-logo-blanco', 'Logotipo de Mercado Libre']],
     backdrop: ['mercadolibre-tucarro/tucarro-tutorial-moto', 'TuCarro: tutorial de moto'],
+    tone: ['#ffd400', '#f2b705', '#c8421c', '#7d0826'],
     gallery: [
       ['mercadolibre-tucarro/mercadolibre-prevencion-estafas', 'Mercado Libre: prevención de estafas'],
       ['mercadolibre-tucarro/mercadolibre-tienda-oficial-lg', 'Mercado Libre: tienda oficial LG'],
@@ -553,6 +557,7 @@ export const projects: Project[] = [
       { label: 'Año', value: '2022' },
     ],
     cover: 'branding/kryss-cakes-laminas/kryss-cakes-portada',
+    backdrop: ['branding/kryss-cakes-mocks/kryss-tarjetas-sobre-fondo', 'Kryss Cakes: tarjetas personales'],
     logos: [
       ['branding/hero/kryss-cakes-logo-blanco', 'Logotipo de Kryss Cakes'],
       ['branding/hero/tai-studio-logo-blanco', 'Logotipo de TAI Studio'],
