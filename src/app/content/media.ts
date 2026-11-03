@@ -4,6 +4,14 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1177,
     "h": 2000
   },
+  "branding/four-two-laminas/four-two-lamina-01-logotipo": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/four-two-laminas/four-two-lamina-02-versiones": {
+    "w": 1600,
+    "h": 1000
+  },
   "branding/four-two-streetwear": {
     "w": 1600,
     "h": 1354
@@ -12,6 +20,30 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1600,
     "h": 1354
   },
+  "branding/kryss-cakes-laminas/kryss-cakes-lamina-01-logotipo": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/kryss-cakes-laminas/kryss-cakes-lamina-02-componentes": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/ovejero-laminas/ovejero-lamina-01-logotipo": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/ovejero-laminas/ovejero-lamina-02-versiones": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/ovejero-laminas/ovejero-lamina-03-isotipo": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/ovejero-laminas/ovejero-lamina-04-fondos": {
+    "w": 1600,
+    "h": 1000
+  },
   "branding/ovejero-uniformes": {
     "w": 1600,
     "h": 1354
@@ -19,6 +51,18 @@ export const media: Record<string, { w: number; h: number }> = {
   "branding/tai-studio": {
     "w": 1600,
     "h": 1354
+  },
+  "branding/tai-studio-laminas/tai-studio-lamina-01-logotipo": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/tai-studio-laminas/tai-studio-lamina-02-versiones": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/tai-studio-laminas/tai-studio-lamina-03-kanji": {
+    "w": 1600,
+    "h": 1000
   },
   "cafe-marketing/cafemkt-promo-01-llenalo-y-crece": {
     "w": 1080,

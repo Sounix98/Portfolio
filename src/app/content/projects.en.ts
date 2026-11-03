@@ -420,6 +420,10 @@ export const phrasesEn: Record<string, string> = {
 
   // Ovejero
   'Lámina de rebranding de Ovejero Uniformes': 'Ovejero Uniformes rebranding board',
+  'Ovejero Uniformes: logotipo y paleta de color': 'Ovejero Uniformes: logo and color palette',
+  'Ovejero Uniformes: versiones color, azul marino e invertida': 'Ovejero Uniformes: color, navy and reversed versions',
+  'Ovejero Uniformes: isotipo en sus tres versiones': 'Ovejero Uniformes: emblem in its three versions',
+  'Ovejero Uniformes: uso del logo sobre distintos fondos': 'Ovejero Uniformes: the logo on different backgrounds',
 
   // Mercado Libre / TuCarro
   'TuCarro: tutorial de moto': 'TuCarro: motorcycle tutorial',
@@ -440,6 +444,13 @@ export const phrasesEn: Record<string, string> = {
   'Branding de Kryss Cakes': 'Kryss Cakes branding',
   'Branding de TAI Studio': 'TAI Studio branding',
   'Branding de Four-Two Streetwear': 'Four-Two Streetwear branding',
+  'Kryss Cakes: logotipo y paleta de color': 'Kryss Cakes: logo and color palette',
+  'Kryss Cakes: logo completo, ilustración y logotipo por separado': 'Kryss Cakes: full logo, illustration and wordmark on their own',
+  'TAI Studio: logotipo y colores': 'TAI Studio: logo and colors',
+  'TAI Studio: logotipo sobre claro, rojo y negro': 'TAI Studio: logo on light, red and black',
+  'TAI Studio: el kanji de la marca sobre negro y sobre claro': 'TAI Studio: the brand’s kanji on black and on light',
+  'Four-Two Streetwear: logotipo': 'Four-Two Streetwear: logo',
+  'Four-Two Streetwear: logotipo y numeral, en claro y en oscuro': 'Four-Two Streetwear: logo and numeral, light and dark',
   'Logotipo de Santuario Streetwear 2021 sobre patrón de marca': 'Santuario Streetwear 2021 logo on a brand pattern',
   'Sudadera con el logotipo de Santuario Streetwear': 'Sweatshirt with the Santuario Streetwear logo',
   'Logotipo de Chaporro': 'Chaporro logo',
