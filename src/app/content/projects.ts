@@ -30,6 +30,8 @@ export type Project = {
   cover: Pic;
   /** Si existe, el fondo del hero rota entre estas imágenes (la primera es la portada). */
   heroSlides?: Pic[];
+  /** Si existe, el hero muestra estos logos en blanco, sin fondo, sobre el negro de la página (a modo de introducción). */
+  heroLogos?: Pic[];
   /** Miniatura fija (hero, Trabajos y «Siguiente proyecto»): elegida por afinidad con el look de la web. */
   thumb: Pic;
   gallery: Pic[];
@@ -49,21 +51,24 @@ function pic(key: string, alt: string): Pic {
   return { src: `/images/${key}.webp`, w: m.w, h: m.h, alt };
 }
 
-type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'heroSlides'> & {
+type Seed = Omit<Project, 'cover' | 'thumb' | 'gallery' | 'galleryGroups' | 'heroSlides' | 'heroLogos'> & {
   cover: string;
   /** [clave, alt] de imágenes extra para el carrusel del hero (tras la portada). */
   slides?: [string, string][];
+  /** [clave, alt] de logos blancos con transparencia para la introducción del hero. */
+  logos?: [string, string][];
   /** [clave, alt] de la miniatura; si falta, se usa la portada. */
   hero?: [string, string];
   gallery: [string, string][]; // [clave, alt]
   groups?: { title: string; items: [string, string][] }[];
 };
 
-const project = ({ cover, hero, slides, gallery, groups, ...seed }: Seed): Project => {
+const project = ({ cover, hero, slides, logos, gallery, groups, ...seed }: Seed): Project => {
   const galleryGroups = groups?.map((g) => ({ title: g.title, images: g.items.map(([k, alt]) => pic(k, alt)) }));
   return {
     ...seed,
     cover: pic(cover, seed.title),
+    heroLogos: logos?.map(([k, alt]) => pic(k, alt)),
     heroSlides: slides ? [pic(cover, seed.title), ...slides.map(([k, alt]) => pic(k, alt))] : undefined,
     thumb: hero ? pic(hero[0], hero[1]) : pic(cover, seed.title),
     gallery: galleryGroups ? galleryGroups.flatMap((g) => g.images) : gallery.map(([k, alt]) => pic(k, alt)),
@@ -429,11 +434,13 @@ export const projects: Project[] = [
       { label: 'Relación', value: 'Pasantía universitaria, 2018–2019' },
       { label: 'Vigencia', value: 'Uniformes, rotulado de máquinas, redes sociales y letrero en relieve de la tienda' },
     ],
-    cover: 'branding/ovejero-uniformes',
+    cover: 'branding/ovejero-laminas/ovejero-portada',
+    logos: [['branding/hero/ovejero-logo-blanco', 'Logotipo de Ovejero Uniformes']],
     gallery: [
-      ['branding/ovejero-uniformes', 'Lámina de rebranding de Ovejero Uniformes'],
       ['branding/ovejero-laminas/ovejero-lamina-01-logotipo', 'Ovejero Uniformes: logotipo y paleta de color'],
+      ['branding/ovejero-mocks/ovejero-tarjetas-oscuras', 'Ovejero Uniformes: tarjetas personales en azul marino con el patrón de la oveja'],
       ['branding/ovejero-laminas/ovejero-lamina-02-versiones', 'Ovejero Uniformes: versiones color, azul marino e invertida'],
+      ['branding/ovejero-mocks/ovejero-papeleria', 'Ovejero Uniformes: papelería con la identidad'],
       ['branding/ovejero-laminas/ovejero-lamina-03-isotipo', 'Ovejero Uniformes: isotipo en sus tres versiones'],
       ['branding/ovejero-laminas/ovejero-lamina-04-fondos', 'Ovejero Uniformes: uso del logo sobre distintos fondos'],
     ],
@@ -539,22 +546,59 @@ export const projects: Project[] = [
       { label: 'Alcance', value: 'Identidad visual' },
       { label: 'Año', value: '2022' },
     ],
-    cover: 'branding/kryss-cakes',
+    cover: 'branding/kryss-cakes-laminas/kryss-cakes-portada',
+    logos: [
+      ['branding/hero/kryss-cakes-logo-blanco', 'Logotipo de Kryss Cakes'],
+      ['branding/hero/tai-studio-logo-blanco', 'Logotipo de TAI Studio'],
+      ['branding/hero/four-two-logo-blanco', 'Logotipo de Four-Two Streetwear'],
+    ],
     hero: ['flyers/photo_2021-08-09_19-49-03', 'Logotipo de Santuario Streetwear 2021'],
-    gallery: [
-      ['branding/kryss-cakes', 'Branding de Kryss Cakes'],
-      ['branding/kryss-cakes-laminas/kryss-cakes-lamina-01-logotipo', 'Kryss Cakes: logotipo y paleta de color'],
-      ['branding/kryss-cakes-laminas/kryss-cakes-lamina-02-componentes', 'Kryss Cakes: logo completo, ilustración y logotipo por separado'],
-      ['branding/tai-studio', 'Branding de TAI Studio'],
-      ['branding/tai-studio-laminas/tai-studio-lamina-01-logotipo', 'TAI Studio: logotipo y colores'],
-      ['branding/tai-studio-laminas/tai-studio-lamina-02-versiones', 'TAI Studio: logotipo sobre claro, rojo y negro'],
-      ['branding/tai-studio-laminas/tai-studio-lamina-03-kanji', 'TAI Studio: el kanji de la marca sobre negro y sobre claro'],
-      ['branding/four-two-streetwear', 'Branding de Four-Two Streetwear'],
-      ['branding/four-two-laminas/four-two-lamina-01-logotipo', 'Four-Two Streetwear: logotipo'],
-      ['branding/four-two-laminas/four-two-lamina-02-versiones', 'Four-Two Streetwear: logotipo y numeral, en claro y en oscuro'],
-      ['flyers/photo_2021-08-09_19-49-03', 'Logotipo de Santuario Streetwear 2021 sobre patrón de marca'],
-      ['flyers/photo_2021-08-09_19-49-11', 'Sudadera con el logotipo de Santuario Streetwear'],
-      ['flyers/photo_2022-04-27_11-48-17', 'Logotipo de Chaporro'],
+    gallery: [],
+    groups: [
+      {
+        title: 'Kryss Cakes',
+        items: [
+          ['branding/kryss-cakes-laminas/kryss-cakes-separador', 'Logotipo de Kryss Cakes'],
+          ['branding/kryss-cakes-laminas/kryss-cakes-lamina-01-logotipo', 'Kryss Cakes: logotipo y paleta de color'],
+          ['branding/kryss-cakes-mocks/kryss-tarjetas-sobre-fondo', 'Kryss Cakes: tarjetas personales sobre fondo rosa y durazno'],
+          ['branding/kryss-cakes-mocks/kryss-tarjeta-patron', 'Kryss Cakes: tarjeta con el patrón de brocado'],
+          ['branding/kryss-cakes-mocks/kryss-tarjeta-datos', 'Kryss Cakes: reverso de la tarjeta con los datos de contacto'],
+          ['branding/kryss-cakes-laminas/kryss-cakes-lamina-02-componentes', 'Kryss Cakes: logo completo, ilustración y logotipo por separado'],
+        ],
+      },
+      {
+        title: 'TAI Studio',
+        items: [
+          ['branding/tai-studio-laminas/tai-studio-separador', 'Logotipo de TAI Studio'],
+          ['branding/tai-studio-laminas/tai-studio-lamina-01-logotipo', 'TAI Studio: logotipo y colores'],
+          ['branding/tai-studio-mocks/tai-post-kanji', 'TAI Studio: publicación con el kanji de la marca'],
+          ['branding/tai-studio-mocks/tai-afiche-2020', 'TAI Studio: afiche «We are style» 2020'],
+          ['branding/tai-studio-mocks/tai-cuadricula-instagram', 'TAI Studio: cuadrícula del perfil de Instagram'],
+          ['branding/tai-studio-mocks/tai-diseno-editorial', 'TAI Studio: composición editorial en rojo y negro'],
+          ['branding/tai-studio-mocks/tai-kanji-negro', 'TAI Studio: kanji sobre negro'],
+          ['branding/tai-studio-laminas/tai-studio-lamina-02-versiones', 'TAI Studio: logotipo sobre claro, rojo y negro'],
+          ['branding/tai-studio-laminas/tai-studio-lamina-03-kanji', 'TAI Studio: el kanji de la marca sobre negro y sobre claro'],
+        ],
+      },
+      {
+        title: 'Four-Two Streetwear',
+        items: [
+          ['branding/four-two-laminas/four-two-separador', 'Logotipo de Four-Two Streetwear'],
+          ['branding/four-two-laminas/four-two-lamina-01-logotipo', 'Four-Two Streetwear: logotipo'],
+          ['branding/four-two-mocks/four-two-historia-metodos-de-pago', 'Four-Two Streetwear: historia de Instagram, métodos de pago'],
+          ['branding/four-two-mocks/four-two-historia-delivery', 'Four-Two Streetwear: historia de Instagram, delivery'],
+          ['branding/four-two-mocks/four-two-historia-clientes', 'Four-Two Streetwear: historia de Instagram, clientes'],
+          ['branding/four-two-laminas/four-two-lamina-02-versiones', 'Four-Two Streetwear: logotipo y numeral, en claro y en oscuro'],
+        ],
+      },
+      {
+        title: 'Santuario y Chaporro',
+        items: [
+          ['flyers/photo_2021-08-09_19-49-03', 'Logotipo de Santuario Streetwear 2021 sobre patrón de marca'],
+          ['flyers/photo_2021-08-09_19-49-11', 'Sudadera con el logotipo de Santuario Streetwear'],
+          ['flyers/photo_2022-04-27_11-48-17', 'Logotipo de Chaporro'],
+        ],
+      },
     ],
   }),
   project({

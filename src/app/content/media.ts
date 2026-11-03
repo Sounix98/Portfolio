@@ -12,9 +12,45 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1600,
     "h": 1000
   },
+  "branding/four-two-laminas/four-two-portada": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/four-two-laminas/four-two-separador": {
+    "w": 1600,
+    "h": 600
+  },
+  "branding/four-two-mocks/four-two-historia-clientes": {
+    "w": 618,
+    "h": 1104
+  },
+  "branding/four-two-mocks/four-two-historia-delivery": {
+    "w": 626,
+    "h": 1105
+  },
+  "branding/four-two-mocks/four-two-historia-metodos-de-pago": {
+    "w": 618,
+    "h": 1102
+  },
   "branding/four-two-streetwear": {
     "w": 1600,
     "h": 1354
+  },
+  "branding/hero/four-two-logo-blanco": {
+    "w": 1600,
+    "h": 1046
+  },
+  "branding/hero/kryss-cakes-logo-blanco": {
+    "w": 1315,
+    "h": 1297
+  },
+  "branding/hero/ovejero-logo-blanco": {
+    "w": 1441,
+    "h": 1147
+  },
+  "branding/hero/tai-studio-logo-blanco": {
+    "w": 1508,
+    "h": 1001
   },
   "branding/kryss-cakes": {
     "w": 1600,
@@ -27,6 +63,26 @@ export const media: Record<string, { w: number; h: number }> = {
   "branding/kryss-cakes-laminas/kryss-cakes-lamina-02-componentes": {
     "w": 1600,
     "h": 1000
+  },
+  "branding/kryss-cakes-laminas/kryss-cakes-portada": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/kryss-cakes-laminas/kryss-cakes-separador": {
+    "w": 1600,
+    "h": 600
+  },
+  "branding/kryss-cakes-mocks/kryss-tarjeta-datos": {
+    "w": 804,
+    "h": 462
+  },
+  "branding/kryss-cakes-mocks/kryss-tarjeta-patron": {
+    "w": 812,
+    "h": 460
+  },
+  "branding/kryss-cakes-mocks/kryss-tarjetas-sobre-fondo": {
+    "w": 926,
+    "h": 988
   },
   "branding/ovejero-laminas/ovejero-lamina-01-logotipo": {
     "w": 1600,
@@ -43,6 +99,22 @@ export const media: Record<string, { w: number; h: number }> = {
   "branding/ovejero-laminas/ovejero-lamina-04-fondos": {
     "w": 1600,
     "h": 1000
+  },
+  "branding/ovejero-laminas/ovejero-portada": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/ovejero-laminas/ovejero-separador": {
+    "w": 1600,
+    "h": 600
+  },
+  "branding/ovejero-mocks/ovejero-papeleria": {
+    "w": 875,
+    "h": 549
+  },
+  "branding/ovejero-mocks/ovejero-tarjetas-oscuras": {
+    "w": 878,
+    "h": 585
   },
   "branding/ovejero-uniformes": {
     "w": 1600,
@@ -63,6 +135,34 @@ export const media: Record<string, { w: number; h: number }> = {
   "branding/tai-studio-laminas/tai-studio-lamina-03-kanji": {
     "w": 1600,
     "h": 1000
+  },
+  "branding/tai-studio-laminas/tai-studio-portada": {
+    "w": 1600,
+    "h": 1000
+  },
+  "branding/tai-studio-laminas/tai-studio-separador": {
+    "w": 1600,
+    "h": 600
+  },
+  "branding/tai-studio-mocks/tai-afiche-2020": {
+    "w": 600,
+    "h": 1036
+  },
+  "branding/tai-studio-mocks/tai-cuadricula-instagram": {
+    "w": 509,
+    "h": 513
+  },
+  "branding/tai-studio-mocks/tai-diseno-editorial": {
+    "w": 506,
+    "h": 488
+  },
+  "branding/tai-studio-mocks/tai-kanji-negro": {
+    "w": 502,
+    "h": 481
+  },
+  "branding/tai-studio-mocks/tai-post-kanji": {
+    "w": 511,
+    "h": 513
   },
   "cafe-marketing/cafemkt-promo-01-llenalo-y-crece": {
     "w": 1080,

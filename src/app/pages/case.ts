@@ -18,7 +18,9 @@ import { NotFound } from './not-found';
       <main>
         <section #hero aria-labelledby="case-title" class="relative h-svh min-h-[560px] overflow-hidden">
           <div #parallax class="absolute -inset-y-[10%] inset-x-0">
-            @if (p.heroSlides; as slides) {
+            @if (p.heroLogos) {
+              <!-- introducción con logo: sin fotografía -->
+            } @else if (p.heroSlides; as slides) {
               @for (s of slides; track s.src; let i = $index) {
                 <img
                   [ngSrc]="s.src"
@@ -37,6 +39,25 @@ import { NotFound } from './not-found';
             }
           </div>
           <div aria-hidden="true" class="absolute inset-0 bg-[var(--overlay-hero)]"></div>
+          @if (p.heroLogos; as logos) {
+            <div class="pointer-events-none absolute inset-x-0 top-[calc(5%+68px)] bottom-[61%] px-[var(--gutter)]">
+              <div class="relative mx-auto h-full w-[min(560px,78vw)]">
+                @for (l of logos; track l.src; let i = $index) {
+                  <img
+                    [ngSrc]="l.src"
+                    fill
+                    [priority]="i === 0"
+                    [loading]="i === 0 ? undefined : 'eager'"
+                    sizes="(max-width: 700px) 78vw, 560px"
+                    class="hero-slide object-contain"
+                    [class.is-active]="i === slide()"
+                    [alt]="i === 0 ? l.alt : ''"
+                    [attr.aria-hidden]="i === slide() ? null : 'true'"
+                  />
+                }
+              </div>
+            </div>
+          }
 
           <div class="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center">
             <span class="t-label rounded-full bg-[rgba(40,40,40,0.7)] px-2.5 py-1.5">{{ p.year }} · {{ p.category }}</span>
@@ -202,7 +223,7 @@ export class Case {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       // Carrusel del fondo: una imagen nueva cada 3 s (quieto si se prefiere menos movimiento).
-      const count = this.project()?.heroSlides?.length ?? 0;
+      const count = this.project()?.heroLogos?.length ?? this.project()?.heroSlides?.length ?? 0;
       if (count > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
         const timer = setInterval(() => this.slide.update((i) => (i + 1) % count), 3000);
         destroyRef.onDestroy(() => clearInterval(timer));

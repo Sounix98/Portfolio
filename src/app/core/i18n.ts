@@ -25,6 +25,7 @@ function localize(p: Project): Project {
     links: p.links?.map((l) => ({ ...l, label: ph(l.label) })),
     cover: pic(p.cover),
     heroSlides: p.heroSlides?.map(pic),
+    heroLogos: p.heroLogos?.map(pic),
     thumb: pic(p.thumb),
     gallery: p.gallery.map(pic),
     galleryGroups: p.galleryGroups?.map((g) => ({ title: ph(g.title), images: g.images.map(pic) })),
