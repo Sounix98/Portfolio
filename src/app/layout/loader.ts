@@ -1,6 +1,7 @@
 import { Component, afterNextRender, inject, signal } from '@angular/core';
 import { TransitionService } from '../core/transition.service';
 import { site } from '../content/site';
+import { I18n } from '../core/i18n';
 
 const DURATION = 1400;
 const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
@@ -13,7 +14,7 @@ const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2,
     class="pointer-events-none fixed inset-0 z-[55] flex items-center justify-center transition-opacity duration-300"
     [class.opacity-0]="t.released()"
     role="status"
-    aria-label="Cargando"
+    [attr.aria-label]="i18n.ui().aria.loading"
   >
     <div class="w-[80vw] md:w-[40vw]">
       <div class="flex items-center justify-between">
@@ -29,6 +30,7 @@ const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2,
 })
 export class Loader {
   protected readonly t = inject(TransitionService);
+  protected readonly i18n = inject(I18n);
   protected readonly brand = site.brand;
   protected readonly pct = signal(0);
   /** Solo existe en el navegador y mientras dura la carga: así su texto no queda en el footer ni en el HTML. */

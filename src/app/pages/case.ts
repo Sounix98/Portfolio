@@ -1,8 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
 import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, input, signal, viewChild } from '@angular/core';
 import { scroll } from 'motion';
-import { getNextProject, getProject } from '../content/projects';
-import { routes, ui } from '../content/site';
+import { routes } from '../content/site';
+import { I18n } from '../core/i18n';
 import { InViewDirective } from '../core/in-view.directive';
 import { TLink } from '../core/tlink.directive';
 import { Footer } from '../layout/footer';
@@ -52,7 +52,7 @@ import { NotFound } from './not-found';
           <div class="absolute inset-x-0 bottom-[18px] px-[var(--gutter)]">
             <a [tLink]="worksRoute" class="group t-label inline-flex items-center gap-1.5">
               <app-icon name="arrow-left" class="transition-transform duration-200 group-hover:-translate-x-[3px]" />
-              {{ ui.allWorks }}
+              {{ ui().allWorks }}
             </a>
             <h1 id="case-title" class="t-case-h1 m-0 mt-[30px]">{{ p.title }}</h1>
           </div>
@@ -62,7 +62,7 @@ import { NotFound } from './not-found';
           <div class="mx-auto w-full max-w-[var(--container-case)] px-[var(--gutter)] pb-[clamp(100px,12vw,160px)] pt-[clamp(80px,9vw,120px)] lg:px-0">
             <!-- Detalles -->
             <section aria-labelledby="details-title" class="grid gap-4 md:grid-cols-[160px_1fr] lg:grid-cols-[42%_1fr]">
-              <h2 id="details-title" class="t-label m-0 text-muted">{{ ui.details }}</h2>
+              <h2 id="details-title" class="t-label m-0 text-muted">{{ ui().details }}</h2>
               <div class="max-w-[596px]">
                 <p class="t-quote m-0 max-w-[560px]">{{ p.intro }}</p>
                 <dl class="m-0 mt-10">
@@ -79,7 +79,7 @@ import { NotFound } from './not-found';
                   @if (p.links?.length) {
                     <div>
                       <div class="flex min-h-[37px] items-center justify-between gap-6 py-2">
-                        <dt class="t-label text-muted">{{ ui.links }}</dt>
+                        <dt class="t-label text-muted">{{ ui().links }}</dt>
                         <dd class="t-label m-0 flex gap-4">
                           @for (l of p.links; track l.url) {
                             <a [href]="l.url" target="_blank" rel="noopener noreferrer" class="bracket">{{ l.label }} ↗</a>
@@ -95,7 +95,7 @@ import { NotFound } from './not-found';
 
             <!-- El reto -->
             <section aria-labelledby="premise-title" class="mt-[clamp(60px,8vw,110px)] grid gap-4 md:grid-cols-[160px_1fr] lg:grid-cols-[42%_1fr]">
-              <h2 id="premise-title" class="t-label m-0 text-muted">{{ ui.premise }}</h2>
+              <h2 id="premise-title" class="t-label m-0 text-muted">{{ ui().premise }}</h2>
               <div class="max-w-[596px]">
                 <h3 class="t-h3 m-0 text-[clamp(22px,2.1vw,26px)]">{{ p.premise.title }}</h3>
                 <div class="mt-5 flex flex-col gap-5 text-[16px] leading-[1.55]">
@@ -109,7 +109,7 @@ import { NotFound } from './not-found';
             <!-- Proceso -->
             @if (p.process.length) {
               <section aria-labelledby="process-title" class="mt-[clamp(48px,6vw,60px)] grid gap-4 md:grid-cols-[160px_1fr] lg:grid-cols-[42%_1fr]">
-                <h2 id="process-title" class="t-label m-0 text-muted">{{ ui.process }}</h2>
+                <h2 id="process-title" class="t-label m-0 text-muted">{{ ui().process }}</h2>
                 <ol class="m-0 flex max-w-[596px] list-none flex-col gap-8 p-0 md:gap-10">
                   @for (step of p.process; track step.title; let i = $index) {
                     <li>
@@ -137,7 +137,7 @@ import { NotFound } from './not-found';
                 </section>
               }
             } @else {
-              <section aria-label="Galería" class="mt-[clamp(80px,10vw,130px)] grid grid-cols-1 gap-[7px] md:grid-cols-2">
+              <section [attr.aria-label]="ui().aria.gallery" class="mt-[clamp(80px,10vw,130px)] grid grid-cols-1 gap-[7px] md:grid-cols-2">
                 @for (g of p.gallery; track g.src) {
                   <div class="reveal overflow-hidden rounded-card" appInView [style.--y]="'0px'" [class.md:col-span-2]="g.w / g.h > 1.3">
                     <img [ngSrc]="g.src" [width]="g.w" [height]="g.h" sizes="(max-width: 1100px) 100vw, 71vw" class="h-auto w-full" [alt]="g.alt" />
@@ -152,7 +152,7 @@ import { NotFound } from './not-found';
             class="group mx-auto mb-[clamp(80px,10vw,140px)] flex w-full max-w-[var(--container-case)] items-center justify-between gap-6 border-y border-line px-[var(--gutter)] py-6 lg:px-0"
           >
             <span class="t-toggle flex items-center gap-3">
-              {{ ui.nextProject }}
+              {{ ui().nextProject }}
               <app-icon name="arrow-right" [size]="18" class="transition-transform duration-200 group-hover:translate-x-[3px]" />
             </span>
             <span class="flex items-center gap-4">
@@ -172,20 +172,21 @@ import { NotFound } from './not-found';
 })
 export class Case {
   readonly slug = input.required<string>();
-  protected readonly ui = ui;
+  private readonly i18n = inject(I18n);
+  protected readonly ui = this.i18n.ui;
   protected readonly worksRoute = routes.works;
   protected route = routes.work;
-  protected readonly project = computed(() => getProject(this.slug()));
-  protected readonly next = computed(() => getNextProject(this.slug()));
+  protected readonly project = computed(() => this.i18n.project(this.slug()));
+  protected readonly next = computed(() => this.i18n.nextProject(this.slug()));
   protected readonly meta = computed<string[][]>(() => {
     const p = this.project();
     if (!p) return [];
     const rows = [
-      [ui.client, p.client],
-      [ui.year, p.year],
-      [ui.role, p.role],
+      [this.ui().client, p.client],
+      [this.ui().year, p.year],
+      [this.ui().role, p.role],
     ];
-    if (p.label) rows.push([ui.type, p.label]);
+    if (p.label) rows.push([this.ui().type, p.label]);
     return rows;
   });
 

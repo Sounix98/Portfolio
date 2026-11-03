@@ -1,39 +1,47 @@
 import { Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { TLink } from '../core/tlink.directive';
 import { TransitionService } from '../core/transition.service';
-import { routes, site, ui } from '../content/site';
+import { routes } from '../content/site';
+import { I18n } from '../core/i18n';
+import { LangSwitch } from './lang-switch';
 import { Icon } from '../ui/icon';
 
 @Component({
   selector: 'app-header',
-  imports: [TLink, Icon],
+  imports: [TLink, Icon, LangSwitch],
   template: `
     <header class="fixed inset-x-0 top-0 h-[46px]" [class]="open() ? 'z-[49]' : 'z-40'">
       <div class="relative z-[52] flex h-full items-center justify-between px-[var(--gutter)]">
-        <a [tLink]="home" class="t-nav" [attr.aria-label]="site.name + ' — inicio'">{{ site.brand }}</a>
+        <a [tLink]="home" class="t-nav" [attr.aria-label]="site().name + ui().aria.homeSuffix">{{ site().brand }}</a>
 
-        <nav aria-label="Principal" class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex">
-          @for (l of links; track l.href) {
+        <nav [attr.aria-label]="ui().aria.main" class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex">
+          @for (l of links(); track l.href) {
             <a [tLink]="l.href" class="bracket t-nav" [attr.aria-current]="isActive(l.href) ? 'page' : null">{{ l.label }}</a>
           }
         </nav>
 
-        <a [href]="'mailto:' + site.email" class="group t-nav hidden items-center gap-1.5 md:flex">
-          {{ ui.nav.contact }}
-          <app-icon name="arrow-right" class="transition-transform duration-200 group-hover:translate-x-[3px]" />
-        </a>
+        <div class="hidden items-center gap-8 md:flex">
+          <app-lang-switch />
+          <a [href]="'mailto:' + site().email" class="group t-nav flex items-center gap-1.5">
+            {{ ui().nav.contact }}
+            <app-icon name="arrow-right" class="transition-transform duration-200 group-hover:translate-x-[3px]" />
+          </a>
+        </div>
 
+        <div class="flex items-center gap-5 md:hidden">
+        <app-lang-switch />
         <button
           #menuButton
           type="button"
-          class="bracket t-nav md:hidden"
+          class="bracket t-nav"
           [attr.aria-expanded]="open()"
           aria-controls="menu-overlay"
           [attr.aria-current]="open() ? 'page' : null"
           (click)="toggle()"
         >
-          {{ open() ? ui.nav.close : ui.nav.menu }}
+          {{ open() ? ui().nav.close : ui().nav.menu }}
         </button>
+        </div>
       </div>
 
       <div
@@ -44,8 +52,8 @@ import { Icon } from '../ui/icon';
         [style.visibility]="open() ? 'visible' : 'hidden'"
         [attr.inert]="open() ? null : ''"
       >
-        <nav aria-label="Menú móvil" class="flex flex-col items-start gap-3">
-          @for (l of mobileLinks; track l.href; let i = $index) {
+        <nav [attr.aria-label]="ui().aria.mobileMenu" class="flex flex-col items-start gap-3">
+          @for (l of mobileLinks(); track l.href; let i = $index) {
             <a
               [tLink]="l.href"
               class="bracket text-[40px] font-semibold uppercase leading-none tracking-[-0.03em] transition-all duration-500"
@@ -57,12 +65,12 @@ import { Icon } from '../ui/icon';
             >
           }
           <a
-            [href]="'mailto:' + site.email"
+            [href]="'mailto:' + site().email"
             class="bracket text-[40px] font-semibold uppercase leading-none tracking-[-0.03em] transition-all duration-500"
             [class.opacity-0]="!open()"
             [class.translate-y-6]="!open()"
-            [style.transition-delay]="open() ? 0.15 + mobileLinks.length * 0.06 + 's' : '0s'"
-            >{{ ui.nav.contact }}</a
+            [style.transition-delay]="open() ? 0.15 + mobileLinks().length * 0.06 + 's' : '0s'"
+            >{{ ui().nav.contact }}</a
           >
         </nav>
       </div>
@@ -74,13 +82,14 @@ export class Header {
   private readonly menu = viewChild.required<ElementRef<HTMLElement>>('menu');
   private readonly button = viewChild.required<ElementRef<HTMLElement>>('menuButton');
 
-  protected readonly site = site;
-  protected readonly ui = ui;
+  private readonly i18n = inject(I18n);
+  protected readonly site = this.i18n.site;
+  protected readonly ui = this.i18n.ui;
   protected readonly home = routes.home;
-  protected readonly links = [
-    { href: routes.works, label: ui.nav.works },
-    { href: routes.about, label: ui.nav.about },
-  ];
+  protected readonly links = computed(() => [
+    { href: routes.works, label: this.ui().nav.works },
+    { href: routes.about, label: this.ui().nav.about },
+  ]);
   // Los enlaces internos pasan por tLink; el correo de contacto se añade solo en el menú móvil.
   protected readonly mobileLinks = this.links;
 

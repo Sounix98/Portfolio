@@ -1,18 +1,10 @@
-import { ResolveFn, Routes } from '@angular/router';
-import { getProject } from './content/projects';
-import { site } from './content/site';
+import { Routes } from '@angular/router';
 
-const suffix = ` — ${site.name}`;
-
-const caseTitle: ResolveFn<string> = (route) => {
-  const project = getProject(route.paramMap.get('slug') ?? '');
-  return (project?.title ?? 'No encontrado') + suffix;
-};
-
+// El título de cada ruta lo resuelve `AppTitleStrategy` (core/i18n.ts) según `data.page` y el idioma activo.
 export const routes: Routes = [
-  { path: '', title: `${site.name} — ${site.role}`, loadComponent: () => import('./pages/home').then((m) => m.Home) },
-  { path: 'sobre-mi', title: 'Sobre mí' + suffix, loadComponent: () => import('./pages/about/about').then((m) => m.About) },
-  { path: 'trabajos', title: 'Trabajos' + suffix, loadComponent: () => import('./pages/works').then((m) => m.Works) },
-  { path: 'trabajos/:slug', title: caseTitle, loadComponent: () => import('./pages/case').then((m) => m.Case) },
-  { path: '**', title: '404' + suffix, loadComponent: () => import('./pages/not-found').then((m) => m.NotFound) },
+  { path: '', data: { page: 'home' }, loadComponent: () => import('./pages/home').then((m) => m.Home) },
+  { path: 'sobre-mi', data: { page: 'about' }, loadComponent: () => import('./pages/about/about').then((m) => m.About) },
+  { path: 'trabajos', data: { page: 'works' }, loadComponent: () => import('./pages/works').then((m) => m.Works) },
+  { path: 'trabajos/:slug', data: { page: 'case' }, loadComponent: () => import('./pages/case').then((m) => m.Case) },
+  { path: '**', data: { page: 'notFound' }, loadComponent: () => import('./pages/not-found').then((m) => m.NotFound) },
 ];

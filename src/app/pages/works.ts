@@ -1,7 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { projects } from '../content/projects';
-import { routes, site, ui } from '../content/site';
+import { Component, inject, signal } from '@angular/core';
+import { routes } from '../content/site';
+import { I18n } from '../core/i18n';
 import { InViewDirective } from '../core/in-view.directive';
 import { TLink } from '../core/tlink.directive';
 import { Footer } from '../layout/footer';
@@ -17,18 +17,18 @@ type View = 'grid' | 'full';
     <main>
       <div class="px-[var(--gutter)] pt-[clamp(110px,15vw,200px)]">
         <h1 class="t-works-h1 m-0 flex items-start gap-1">
-          {{ ui.nav.works }}
-          <sup class="mt-1 text-[22px] font-medium tracking-normal" [attr.aria-label]="projects.length + ' proyectos'">({{ projects.length }})</sup>
+          {{ ui().nav.works }}
+          <sup class="mt-1 text-[22px] font-medium tracking-normal" [attr.aria-label]="projects().length + ' ' + ui().aria.projects">({{ projects().length }})</sup>
         </h1>
 
         <div class="mt-10 grid items-end gap-6 md:grid-cols-3 md:gap-2">
-          <p class="max-w-[720px] text-[16px] leading-[1.55] text-soft md:col-span-2">{{ site.worksDescription }}</p>
-          <div role="group" [attr.aria-label]="ui.view" class="flex items-center gap-16 lg:gap-[220px]">
+          <p class="max-w-[720px] text-[16px] leading-[1.55] text-soft md:col-span-2">{{ site().worksDescription }}</p>
+          <div role="group" [attr.aria-label]="ui().view" class="flex items-center gap-16 lg:gap-[220px]">
             <button type="button" [attr.aria-pressed]="view() === 'grid'" (click)="view.set('grid')" class="t-toggle flex items-center gap-2 transition-colors" [class]="view() === 'grid' ? 'text-ink' : 'text-dim hover:text-soft'">
-              {{ ui.grid }} <app-icon name="grid" [size]="14" />
+              {{ ui().grid }} <app-icon name="grid" [size]="14" />
             </button>
             <button type="button" [attr.aria-pressed]="view() === 'full'" (click)="view.set('full')" class="t-toggle flex items-center gap-2 transition-colors" [class]="view() === 'full' ? 'text-ink' : 'text-dim hover:text-soft'">
-              {{ ui.full }} <app-icon name="full" [size]="14" />
+              {{ ui().full }} <app-icon name="full" [size]="14" />
             </button>
           </div>
         </div>
@@ -38,7 +38,7 @@ type View = 'grid' | 'full';
         <ul
           class="fade-in m-0 mt-[clamp(64px,9vw,125px)] grid list-none grid-cols-1 gap-x-2 gap-y-12 p-0 px-[var(--gutter)] pb-24 [--col:calc((100vw-2*var(--gutter)-8px)/2)] md:grid-cols-2 md:gap-y-0 lg:grid-cols-3 lg:[--col:calc((100vw-2*var(--gutter)-16px)/3)]"
         >
-          @for (p of projects; track p.slug; let i = $index) {
+          @for (p of projects(); track p.slug; let i = $index) {
             <li class="reveal md:h-[calc(var(--col)*0.995+3.5rem)]" appInView [style.--d]="(i % 3) * 0.08 + 's'" [style.--y]="'30px'">
               <a [tLink]="route(p.slug)" class="group block">
                 <p class="t-label mb-2">{{ p.year }} · {{ p.category }}</p>
@@ -54,7 +54,7 @@ type View = 'grid' | 'full';
         </ul>
       } @else {
         <ul class="fade-in m-0 mx-[var(--gutter)] mt-[clamp(64px,9vw,125px)] list-none p-0">
-          @for (p of projects; track p.slug) {
+          @for (p of projects(); track p.slug) {
             <li>
               <a
                 [tLink]="route(p.slug)"
@@ -86,9 +86,10 @@ type View = 'grid' | 'full';
   `,
 })
 export class Works {
-  protected readonly projects = projects;
-  protected readonly site = site;
-  protected readonly ui = ui;
+  private readonly i18n = inject(I18n);
+  protected readonly projects = this.i18n.projects;
+  protected readonly site = this.i18n.site;
+  protected readonly ui = this.i18n.ui;
   protected readonly view = signal<View>('grid');
   protected route = routes.work;
 }

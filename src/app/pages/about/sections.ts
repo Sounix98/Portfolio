@@ -1,10 +1,8 @@
 import { NgOptimizedImage } from '@angular/common';
-import { Component, DestroyRef, ElementRef, afterNextRender, inject, input, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, effect, inject, input, signal, viewChild } from '@angular/core';
 import { scroll } from 'motion';
-import { experience } from '../../content/experience';
-import { expertise, stats } from '../../content/expertise';
 import { socials } from '../../content/socials';
-import { ui } from '../../content/site';
+import { I18n } from '../../core/i18n';
 import { clientLogos } from '../../content/logos';
 import { testimonials } from '../../content/testimonials';
 import { InViewDirective } from '../../core/in-view.directive';
@@ -34,14 +32,16 @@ export class StatementReveal {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       const el = this.h1().nativeElement;
-      const spans = Array.from(el.querySelectorAll<HTMLElement>('.word'));
       if (reduced()) {
-        spans.forEach((s) => (s.style.color = '#fff'));
+        const paint = () => el.querySelectorAll<HTMLElement>('.word').forEach((s) => (s.style.color = '#fff'));
+        paint();
+        new MutationObserver(paint).observe(el, { childList: true });
         return;
       }
-      const n = spans.length;
       const stop = scroll(
         (progress: number) => {
+          const spans = Array.from(el.querySelectorAll<HTMLElement>('.word'));
+          const n = spans.length;
           spans.forEach((s, i) => {
             const t = Math.min(1, Math.max(0, (progress - i / n) / (1 / n)));
             const v = Math.round(94 + (255 - 94) * t);
@@ -59,7 +59,7 @@ export class StatementReveal {
   selector: 'app-stats',
   imports: [Counter, InViewDirective],
   template: `<dl class="m-0">
-    @for (s of stats; track s.label; let i = $index) {
+    @for (s of stats(); track s.label; let i = $index) {
       <div>
         <div class="flex h-[47px] items-center justify-between">
           <dd class="m-0 order-1"><app-counter [value]="s.value" [suffix]="s.suffix ?? ''" /></dd>
@@ -71,14 +71,14 @@ export class StatementReveal {
   </dl>`,
 })
 export class Stats {
-  protected readonly stats = stats;
+  protected readonly stats = inject(I18n).stats;
 }
 
 @Component({
   selector: 'app-expertise-list',
   imports: [InViewDirective],
   template: `<ul class="m-0 flex list-none flex-col gap-2 p-0">
-    @for (e of items; track e.label; let i = $index) {
+    @for (e of items(); track e.label; let i = $index) {
       <li class="reveal" appInView [style.--d]="i * 0.06 + 's'">
         <article class="flex min-h-[96px] items-stretch rounded-card justify-between gap-4 bg-gradient-to-b from-[#232323] to-[#1d1d1d] p-[14px] md:min-h-[126px]">
           <div class="flex flex-col justify-center">
@@ -105,7 +105,7 @@ export class Stats {
   </ul>`,
 })
 export class ExpertiseList {
-  protected readonly items = expertise;
+  protected readonly items = inject(I18n).expertise;
 }
 
 @Component({
@@ -116,7 +116,7 @@ export class ExpertiseList {
       #track
       (scroll)="sync()"
       class="no-scrollbar mask-fade-r m-0 flex list-none snap-x snap-mandatory gap-2 overflow-x-auto p-0 lg:-mr-[calc(var(--gutter)+224px)] lg:pr-24"
-      aria-label="Testimonios"
+      [attr.aria-label]="ui().aria.testimonials"
     >
       @for (t of items; track $index) {
         <li class="flex min-h-[206px] w-[85%] shrink-0 snap-start flex-col rounded-card justify-between bg-gradient-to-b from-[#232323] to-[#1d1d1d] p-[21px] md:w-[354px]">
@@ -133,7 +133,7 @@ export class ExpertiseList {
       type="button"
       (click)="next()"
       [disabled]="atEnd()"
-      [attr.aria-label]="ui.next"
+      [attr.aria-label]="ui().next"
       class="absolute right-0 top-1/2 hidden -translate-y-1/2 p-3 opacity-60 transition-opacity hover:opacity-100 disabled:cursor-default disabled:opacity-30 md:block lg:-right-[calc(var(--gutter)+224px-48px)]"
     >
       <app-icon name="chevron-right" [size]="14" />
@@ -142,7 +142,7 @@ export class ExpertiseList {
 })
 export class TestimonialsCarousel {
   protected readonly items = testimonials;
-  protected readonly ui = ui;
+  protected readonly ui = inject(I18n).ui;
   protected readonly atEnd = signal(false);
   private readonly track = viewChild.required<ElementRef<HTMLElement>>('track');
 
@@ -165,7 +165,7 @@ export class TestimonialsCarousel {
 @Component({
   selector: 'app-logo-marquee',
   imports: [InViewDirective],
-  template: `<div class="marquee mask-fade-x overflow-hidden" appInView margin="0px" aria-label="Clientes">
+  template: `<div class="marquee mask-fade-x overflow-hidden" appInView margin="0px" [attr.aria-label]="ui().aria.clients">
     <ul class="marquee-track m-0 list-none p-0">
       @for (n of list; track $index) {
         <li class="flex h-10 shrink-0 items-center px-9 opacity-60" [attr.aria-hidden]="$index >= count ? 'true' : null">
@@ -176,6 +176,7 @@ export class TestimonialsCarousel {
   </div>`,
 })
 export class LogoMarquee {
+  protected readonly ui = inject(I18n).ui;
   protected readonly count = clientLogos.length;
   protected readonly list = [...clientLogos, ...clientLogos];
 }
@@ -187,7 +188,7 @@ export class LogoMarquee {
     <span aria-hidden="true" class="absolute bottom-0 top-0 w-px bg-line max-lg:left-[27px] lg:right-[27px]"></span>
     <span #fill aria-hidden="true" class="absolute bottom-0 top-0 w-px origin-top scale-y-0 bg-white/60 max-lg:left-[27px] lg:right-[27px]"></span>
     <ol #list class="m-0 list-none p-0">
-      @for (item of items; track item.title) {
+      @for (item of items(); track item.title) {
         <li class="dim-item relative pb-[130px] last:pb-0 max-lg:pl-[78px] lg:pr-[84px]" appInView margin="0px 0px -50% 0px">
           <span
             aria-hidden="true"
@@ -208,7 +209,7 @@ export class LogoMarquee {
   </div>`,
 })
 export class ExperienceTimeline {
-  protected readonly items = experience;
+  protected readonly items = inject(I18n).experience;
   private readonly fill = viewChild.required<ElementRef<HTMLElement>>('fill');
   private readonly list = viewChild.required<ElementRef<HTMLElement>>('list');
 

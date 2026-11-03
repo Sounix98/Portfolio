@@ -1,9 +1,66 @@
 /**
- * Textos globales de la interfaz. Todo el sitio está en español;
- * para pasar a inglés basta con reemplazar los valores de `ui` (versión en inglés pendiente).
+ * Textos globales de la interfaz (español, idioma por defecto).
+ * La versión en inglés americano vive en `en.ts`; el idioma activo lo decide `I18n` (ver `core/i18n.ts`).
  * Fuente de contenido: portfolio-kit/GUIA_PORTAFOLIO.md
  */
-export const site = {
+export type SiteCopy = {
+  name: string;
+  brand: string;
+  role: string;
+  location: string;
+  email: string;
+  phone: string;
+  whatsapp: string;
+  year: number;
+  description: string;
+  heroSubtitle: string;
+  worksDescription: string;
+  statement: string;
+  statementSubtitle: string;
+  statementParagraph: string;
+  contactIntro: string;
+};
+
+export type UiCopy = {
+  nav: { works: string; about: string; contact: string; menu: string; close: string };
+  allWorks: string;
+  details: string;
+  premise: string;
+  process: string;
+  client: string;
+  year: string;
+  role: string;
+  type: string;
+  links: string;
+  nextProject: string;
+  expertise: string;
+  clients: string;
+  experience: string;
+  contact: string;
+  grid: string;
+  full: string;
+  view: string;
+  next: string;
+  basedIn: string;
+  notFound: string;
+  backHome: string;
+  aria: {
+    main: string;
+    mobileMenu: string;
+    homeSuffix: string;
+    projects: string;
+    gallery: string;
+    figures: string;
+    testimonials: string;
+    clients: string;
+    social: string;
+    loading: string;
+    language: string;
+    notFoundTitle: string;
+  };
+};
+
+export const site: SiteCopy = {
   name: 'Sounix Romero',
   brand: 'SOUNIX',
   role: 'Diseñador Gráfico & UX/UI',
@@ -23,9 +80,9 @@ export const site = {
   statementParagraph:
     'Llevo 10 años diseñando piezas que tienen que funcionar en el mundo real: pantallas LED en eventos masivos, campañas de prevención de estafas para Mercado Libre, marcas de streetwear que viven en la calle. Hoy llevo esa exigencia a producto: en VEXBIZ rediseñé el flujo de compra y venta y lo construyo en Angular.',
   contactIntro: 'Abierto a roles de producto en remoto y a proyectos de marca. Escríbeme por donde prefieras.',
-} as const;
+};
 
-export const ui = {
+export const ui: UiCopy = {
   nav: { works: 'TRABAJOS', about: 'SOBRE MÍ', contact: 'CONTACTO', menu: 'MENÚ', close: 'CERRAR' },
   allWorks: 'TODOS LOS TRABAJOS',
   details: 'DETALLES',
@@ -45,7 +102,24 @@ export const ui = {
   full: 'Full',
   view: 'Vista',
   next: 'Siguiente',
-} as const;
+  basedIn: 'BASADO EN',
+  notFound: 'Esta página no existe.',
+  backHome: 'VOLVER AL INICIO',
+  aria: {
+    main: 'Principal',
+    mobileMenu: 'Menú móvil',
+    homeSuffix: ' — inicio',
+    projects: 'proyectos',
+    gallery: 'Galería',
+    figures: 'Cifras',
+    testimonials: 'Testimonios',
+    clients: 'Clientes',
+    social: 'Redes',
+    loading: 'Cargando',
+    language: 'Idioma',
+    notFoundTitle: 'No encontrado',
+  },
+};
 
 export const routes = {
   home: '/',
