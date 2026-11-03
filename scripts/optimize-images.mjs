@@ -18,7 +18,11 @@ const walk = (dir) =>
     return e.isDirectory() ? walk(p) : [p];
   });
 
-const files = walk(SRC).filter((f) => /\.(png|jpe?g)$/i.test(f));
+// Los logos de clientes y aliados ahora son SVG (public/images/logos): sus PNG quedan solo como fuente.
+const SKIP = ['clientes/', 'flyers/logos/'];
+const files = walk(SRC)
+  .filter((f) => /\.(png|jpe?g)$/i.test(f))
+  .filter((f) => !SKIP.some((d) => path.relative(SRC, f).split(path.sep).join('/').startsWith(d)));
 const entries = {};
 
 if (fs.existsSync(OUT)) walk(OUT).filter((f) => f.endsWith('.webp')).forEach((f) => fs.rmSync(f));

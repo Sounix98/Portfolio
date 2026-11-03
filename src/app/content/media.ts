@@ -72,46 +72,6 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 1080,
     "h": 1350
   },
-  "clientes/cafe-marketing": {
-    "w": 289,
-    "h": 400
-  },
-  "clientes/dviajes": {
-    "w": 558,
-    "h": 110
-  },
-  "clientes/ledco": {
-    "w": 707,
-    "h": 308
-  },
-  "clientes/mercado-libre": {
-    "w": 414,
-    "h": 110
-  },
-  "clientes/nanologic": {
-    "w": 162,
-    "h": 178
-  },
-  "clientes/ntac": {
-    "w": 959,
-    "h": 510
-  },
-  "clientes/ovejero": {
-    "w": 459,
-    "h": 367
-  },
-  "clientes/tucarro": {
-    "w": 470,
-    "h": 110
-  },
-  "clientes/vexbiz": {
-    "w": 1129,
-    "h": 439
-  },
-  "clientes/zipo": {
-    "w": 882,
-    "h": 700
-  },
   "flyers/bazar-emprendimientos": {
     "w": 829,
     "h": 826
@@ -119,34 +79,6 @@ export const media: Record<string, { w: number; h: number }> = {
   "flyers/flyer-last-food-lacosta": {
     "w": 1080,
     "h": 1350
-  },
-  "flyers/logos/avatar-ilustracion": {
-    "w": 191,
-    "h": 179
-  },
-  "flyers/logos/capibara": {
-    "w": 383,
-    "h": 196
-  },
-  "flyers/logos/conejo-mascara": {
-    "w": 133,
-    "h": 211
-  },
-  "flyers/logos/lacosta": {
-    "w": 404,
-    "h": 91
-  },
-  "flyers/logos/lecheria": {
-    "w": 329,
-    "h": 128
-  },
-  "flyers/logos/pesher": {
-    "w": 317,
-    "h": 165
-  },
-  "flyers/logos/w": {
-    "w": 206,
-    "h": 168
   },
   "flyers/photo_2021-08-09_19-49-03": {
     "w": 850,
