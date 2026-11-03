@@ -90,9 +90,29 @@ export const projects: Project[] = [
       { label: 'Marketplace', url: 'https://sounix98.github.io/vexbiz-marketplace/#/inicio' },
       { label: 'Desktop', url: 'https://sounix98.github.io/VEXBIZ-DESKTOP-1/#/inicio' },
     ],
-    // TODO: capturas de VEXBIZ (home, categorías, tienda, checkout). Hasta entonces se ve un placeholder.
-    cover: 'vexbiz/pendiente',
+    cover: 'vexbiz/vexbiz-furgoneta-trasera',
+    hero: ['vexbiz/vexbiz-marca-oscura', 'VEXBIZ: wordmark sobre fondo de red'],
     gallery: [],
+    groups: [
+      {
+        title: 'App móvil',
+        items: [
+          ['vexbiz/vexbiz-app-01-descubrir', 'Marketplace VEXBIZ en móvil: inicio, categorías y página de nicho de Refrigeración'],
+          ['vexbiz/vexbiz-app-02-comprar', 'Marketplace VEXBIZ en móvil: producto, carrito y entrega y pago'],
+          ['vexbiz/vexbiz-app-03-cuenta-y-nichos', 'Marketplace VEXBIZ en móvil: inicio de sesión, cuenta y nicho Automotriz en tema claro'],
+          ['vexbiz/vexbiz-app-04-claro-y-oscuro', 'Marketplace VEXBIZ en móvil: inicio y producto en tema claro y oscuro'],
+        ],
+      },
+      {
+        title: 'Marca y contexto',
+        items: [
+          ['vexbiz/vexbiz-furgoneta-lateral', 'Furgoneta de VEXBIZ Suministros recorriendo una avenida al atardecer'],
+          ['vexbiz/vexbiz-wordmark-claro', 'Wordmark de VEXBIZ en relieve sobre fondo claro'],
+          ['vexbiz/vexbiz-marca-oscura', 'Wordmark de VEXBIZ sobre fondo azul oscuro con red de puntos'],
+          ['vexbiz/vexbiz-calle-palmeras', 'Furgoneta de VEXBIZ en una calle con palmeras'],
+        ],
+      },
+    ],
   }),
   project({
     slug: 'ntac',

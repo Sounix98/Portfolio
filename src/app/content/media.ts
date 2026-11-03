@@ -664,6 +664,42 @@ export const media: Record<string, { w: number; h: number }> = {
     "w": 776,
     "h": 776
   },
+  "vexbiz/vexbiz-app-01-descubrir": {
+    "w": 1600,
+    "h": 900
+  },
+  "vexbiz/vexbiz-app-02-comprar": {
+    "w": 1600,
+    "h": 900
+  },
+  "vexbiz/vexbiz-app-03-cuenta-y-nichos": {
+    "w": 1600,
+    "h": 900
+  },
+  "vexbiz/vexbiz-app-04-claro-y-oscuro": {
+    "w": 1600,
+    "h": 900
+  },
+  "vexbiz/vexbiz-calle-palmeras": {
+    "w": 1600,
+    "h": 1858
+  },
+  "vexbiz/vexbiz-furgoneta-lateral": {
+    "w": 1600,
+    "h": 873
+  },
+  "vexbiz/vexbiz-furgoneta-trasera": {
+    "w": 1600,
+    "h": 873
+  },
+  "vexbiz/vexbiz-marca-oscura": {
+    "w": 1350,
+    "h": 1500
+  },
+  "vexbiz/vexbiz-wordmark-claro": {
+    "w": 1600,
+    "h": 937
+  },
   "zipo/zipo-logo-blanco": {
     "w": 882,
     "h": 700
