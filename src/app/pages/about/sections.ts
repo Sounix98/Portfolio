@@ -169,7 +169,7 @@ export class TestimonialsCarousel {
     <ul class="marquee-track m-0 list-none p-0">
       @for (n of list; track $index) {
         <li class="flex h-10 shrink-0 items-center px-9 opacity-60">
-          <img [src]="n.src" [alt]="n.name" [width]="n.w" [height]="n.h" [style.height.px]="n.dh" class="w-auto" loading="lazy" />
+          <img [src]="n.src" [alt]="n.name" [width]="n.w" [height]="n.h" [style.height.px]="n.dh" class="w-auto" loading="eager" />
         </li>
       }
     </ul>

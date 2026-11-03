@@ -1,4 +1,26 @@
-import { media } from './media';
+/** Logos vectoriales (blancos, fondo transparente) en public/images/logos. Tamaño = viewBox del SVG. */
+const SIZES: Record<string, readonly [number, number]> = {
+  'avatar-ilustracion.mono': [168, 150],
+  'cafe-marketing': [360, 459],
+  capibara: [338, 97],
+  'conejo-mascara': [114, 201],
+  dviajes: [546, 99],
+  'four-two': [213, 95],
+  'kryss-cakes': [195, 195],
+  lacosta: [383, 69],
+  lecheria: [309, 108],
+  ledco: [703, 304],
+  'mercado-libre': [397, 102],
+  nanologic: [161, 180],
+  ntac: [955, 506],
+  ovejero: [455, 363],
+  pesher: [296, 144],
+  'tai-studio': [189, 126],
+  tucarro: [409, 87],
+  vexbiz: [1127, 439],
+  w: [185, 147],
+  zipo: [881, 700],
+};
 
 export type EventLogo = {
   name: string;
@@ -10,8 +32,8 @@ export type EventLogo = {
 };
 
 const logo = (key: string, name: string, mode: EventLogo['mode'] = 'mono'): EventLogo => {
-  const m = media[`flyers/logos/${key}`];
-  return { name, src: `/images/flyers/logos/${key}.webp`, w: m?.w ?? 300, h: m?.h ?? 100, mode };
+  const [w, h] = SIZES[key] ?? [300, 100];
+  return { name, src: `/images/logos/${key}.svg`, w, h, mode };
 };
 
 /**
@@ -21,7 +43,7 @@ const logo = (key: string, name: string, mode: EventLogo['mode'] = 'mono'): Even
 export const eventLogos: EventLogo[] = [
   logo('lecheria', 'Lechería'),
   logo('lacosta', 'Lacosta'),
-  logo('avatar-ilustracion', 'Aliado ilustrado', 'color'),
+  logo('avatar-ilustracion.mono', 'Aliado ilustrado'),
   logo('conejo-mascara', 'Logo de conejo con máscara'),
   logo('w', 'Logo W'),
   logo('capibara', 'Capibara Food Delivery'),
@@ -37,13 +59,11 @@ export type ClientLogo = {
   dh: number;
 };
 
-/** `key` = nombre del archivo en assets/clientes (logo blanco con fondo transparente). */
+/** `key` = nombre del SVG en public/images/logos (logo blanco con fondo transparente). */
 export const clientLogo = (key: string, name: string): ClientLogo => {
-  const m = media[`clientes/${key}`];
-  const w = m?.w ?? 200;
-  const h = m?.h ?? 80;
+  const [w, h] = SIZES[key] ?? [200, 80];
   const dh = Math.min(36, Math.max(22, 150 / (w / h)));
-  return { name, src: `/images/clientes/${key}.webp`, w, h, dh };
+  return { name, src: `/images/logos/${key}.svg`, w, h, dh };
 };
 
 // Clientes y marcas destacadas del carrusel de Sobre mí.
@@ -57,4 +77,7 @@ export const clientLogos: ClientLogo[] = [
   clientLogo('dviajes', 'D’Viajes'),
   clientLogo('cafe-marketing', 'Café Marketing'),
   clientLogo('ovejero', 'Ovejero Uniformes'),
+  clientLogo('tai-studio', 'Tai Studio'),
+  clientLogo('four-two', 'Four-Two Streetwear'),
+  clientLogo('kryss-cakes', 'Kryss Cakes'),
 ];

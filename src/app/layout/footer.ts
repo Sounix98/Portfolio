@@ -30,7 +30,7 @@ import { Wordmark } from '../ui/wordmark';
                     [attr.aria-hidden]="$index < logos.length ? null : 'true'"
                     [width]="l.w"
                     [height]="l.h"
-                    loading="lazy"
+                    loading="eager"
                     class="h-7 w-auto opacity-60"
                     [class.grayscale]="l.mode === 'color'"
                   />
