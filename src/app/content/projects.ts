@@ -302,19 +302,22 @@ export const projects: Project[] = [
     title: 'ZIPO',
     year: '2024',
     category: 'Branding y merch',
-    tagline: 'Lettering de fuego para una marca de calle.',
+    tagline: 'Rebranding a mano: lettering de fuego para su merch.',
     label: 'Cliente recurrente',
     client: 'ZIPO',
-    role: 'Identidad visual y diseño de merch',
-    intro: 'ZIPO es un cliente recurrente desde 2024 que necesitaba una identidad con fuerza para su merch.',
+    role: 'Identidad visual, dibujo a mano y diseño de merch',
+    intro:
+      'ZIPO es un gran colega del mundo de la música que maneja negocios y también es promotor de eventos, por eso requiere mis servicios con frecuencia. Este proyecto fue su rebranding.',
     premise: {
-      title: 'Una identidad que se lleva puesta',
+      title: 'Una imagen comercial que se lleva puesta',
       paragraphs: [
-        'Diseñé un logotipo en lettering de fuego y lo apliqué a camisetas, gorras bordadas y un póster 2024.',
+        'El rebranding buscaba darle una imagen comercial con fuerza para hacer merch con ella.',
+        'Dibujé el logo a mano y luego vectoricé las flamas del nombre en Photoshop e Illustrator. El lettering de fuego se aplicó a camisetas, gorras bordadas y un póster 2024.',
       ],
     },
     process: [
-      { title: 'Lettering', text: 'Un logotipo en lettering de fuego, en versión negra y blanca.' },
+      { title: 'Dibujo a mano', text: 'Dibujé el logo a mano, con el nombre en lettering de fuego.' },
+      { title: 'Vectorización', text: 'Vectoricé las flamas del nombre en Photoshop e Illustrator, en versión negra y blanca.' },
       { title: 'Merch', text: 'Camisetas y gorras bordadas con la línea gráfica de la marca.' },
       { title: 'Póster 2024', text: 'Una pieza editorial que lleva el lettering a gran formato.' },
     ],

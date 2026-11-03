@@ -103,17 +103,22 @@ export const projectsEn: Record<string, ProjectText> = {
   zipo: {
     title: 'ZIPO',
     category: 'Branding and Merch',
-    tagline: 'Fire lettering for a streetwear brand.',
+    tagline: 'A hand-drawn rebrand: fire lettering for his merch.',
     label: 'Returning client',
     client: 'ZIPO',
-    role: 'Visual identity and merch design',
-    intro: 'ZIPO has been a returning client since 2024, and needed a bold identity for its merch.',
+    role: 'Visual identity, hand illustration and merch design',
+    intro:
+      'ZIPO is a great friend and colleague from the music world who runs businesses and also promotes events, so he hires me often. This project was his rebrand.',
     premise: {
-      title: 'An identity you can wear',
-      paragraphs: ['I designed a fire-lettering logo and applied it to T-shirts, embroidered caps and a 2024 poster.'],
+      title: 'A commercial image you can wear',
+      paragraphs: [
+        'The rebrand aimed to give him a strong commercial image to build merch around.',
+        'I drew the logo by hand, then vectorized the flames in the name in Photoshop and Illustrator. The fire lettering was applied to T-shirts, embroidered caps and a 2024 poster.',
+      ],
     },
     process: [
-      { title: 'Lettering', text: 'A fire-lettering logo, in black and white versions.' },
+      { title: 'Hand drawing', text: 'I drew the logo by hand, with the name in fire lettering.' },
+      { title: 'Vectorizing', text: 'I vectorized the flames in the name in Photoshop and Illustrator, in black and white versions.' },
       { title: 'Merch', text: 'T-shirts and embroidered caps following the brand’s graphic line.' },
       { title: '2024 poster', text: 'An editorial piece that brings the lettering to a large format.' },
     ],
